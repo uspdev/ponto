@@ -14,3 +14,10 @@ yarn-error.log
 /.idea
 /.vscode
 public/vendor
+
+*~
+*.swp
+
+.lando.yml
+Dockerfile.custom
+php.ini
