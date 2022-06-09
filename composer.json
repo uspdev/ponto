@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.5",
         "uspdev/laravel-usp-theme": "^2.5",
         "uspdev/replicado": "^1.13",
-        "uspdev/senhaunica-socialite": "^4.3"
+        "uspdev/senhaunica-socialite": "^4.3",
+        "uspdev/wsfoto": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

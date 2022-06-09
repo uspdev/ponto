@@ -15,7 +15,10 @@
     @foreach($monitores as $key => $value)
     <tr>
         <td>{{ $key }}</td>
-        <td>{{-- $foto --}} {{ $value }}</td>
+        <td>
+          <!-- <img style="width: 80px; float: left;" src="data:image/png;base64, {{-- \Uspdev\Wsfoto::obter($key) --}}" alt="foto"> -->
+          {{ $value }}
+        </td>
     </tr>
     @endforeach
   </tbody>
