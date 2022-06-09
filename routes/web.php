@@ -17,3 +17,4 @@ Route::post('places', [PlaceController::class,'store']);
 Route::get('places', [PlaceController::class,'index']);
 
 Route::get('monitores', [MonitorController::class,'index']);
+Route::get('monitores/{monitor}', [MonitorController::class,'show']);
