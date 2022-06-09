@@ -2,12 +2,17 @@
 
 $menu = [
     [
-        'text' => 'Registrar Acesso',
+        'text' => '<i class="fa fa-business-time"></i> Registrar Acesso',
         'url' => '/registros/create',
     ],
     [
-        'text' => 'Locais',
+        'text' => '<i class="fa fa-building"></i> Locais',
         'url'  => '/places',
+        'can'  => 'admin'
+    ],
+    [
+        'text' => '<i class="fa fa-user-tie"></i> Monitores',
+        'url'  => '/monitores',
         'can'  => 'admin'
     ],
 ];
@@ -25,7 +30,7 @@ return [
     # valor pode ser substituido pela aplicação.
     'title' => config('app.name'),
 
-    # USP_THEME_SKIN deve ser colocado no .env da aplicação 
+    # USP_THEME_SKIN deve ser colocado no .env da aplicação
     'skin' => env('USP_THEME_SKIN', 'uspdev'),
 
     # chave da sessão. Troque em caso de colisão com outra variável de sessão.
