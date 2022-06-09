@@ -2,7 +2,7 @@
 
 $menu = [
     [
-        'text' => '<i class="fa fa-business-time"></i> Registrar Acesso',
+        'text' => '<i class="fa fa-business-time"></i> Registrar ponto',
         'url' => '/registros/create',
     ],
     [

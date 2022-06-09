@@ -2,28 +2,32 @@
 
 @section('content')
 
-<table class="table table-sm table-striped table-hover datatable-monitores">
-
-  <thead>
-    <tr>
-      <th scope="col">Nº USP</th>
-      <th scope="col">Nome</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    @foreach($monitores as $key => $value)
-    <tr>
-        <td>{{ $key }}</td>
-        <td>
-          <!-- <img style="width: 80px; float: left;" src="data:image/png;base64, {{-- \Uspdev\Wsfoto::obter($key) --}}" alt="foto"> -->
-          {{ $value }}
-        </td>
-    </tr>
-    @endforeach
-  </tbody>
-
-</table>
+<div class="card">
+  <div class="card-header font-weight-bold">
+    Monitores
+  </div>
+  <div class="card-body">
+    <table class="table table-sm table-striped table-hover datatable-monitores">
+      <thead>
+        <tr>
+          <th scope="col">Nº USP</th>
+          <th scope="col">Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($monitores as $key => $value)
+        <tr>
+            <td>{{ $key }}</td>
+            <td>
+              <!-- <img style="width: 80px; float: left;" src="data:image/png;base64, {{-- \Uspdev\Wsfoto::obter($key) --}}" alt="foto"> -->
+              <a href="/monitores/{{ $key }}">{{ $value }}</a>
+            </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
 
 @endsection
 
