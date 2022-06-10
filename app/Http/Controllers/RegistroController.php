@@ -33,7 +33,6 @@ class RegistroController extends Controller
         ]);
     }
 
-
     public function store(RegistroRequest $request)
     {
         $validated = $request->validated();
@@ -70,5 +69,13 @@ class RegistroController extends Controller
         return redirect('/');
     }
 
-    
+    public function show()
+    {
+        $this->authorize('admin');
+        $registroId = explode('/', url()->current())[4];
+        $registro = Registro::find($registroId);
+        return view('registros.show', [
+            'registro' => $registro
+        ]);
+    }
 }

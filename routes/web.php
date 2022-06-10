@@ -11,6 +11,7 @@ Route::get('/', [IndexController::class,'index']);
 
 Route::get('registros/create', [RegistroController::class,'create']);
 Route::post('registros', [RegistroController::class,'store']);
+Route::get('registros/{registro}', [RegistroController::class,'show']);
 
 Route::get('places/create', [PlaceController::class,'create']);
 Route::post('places', [PlaceController::class,'store']);
