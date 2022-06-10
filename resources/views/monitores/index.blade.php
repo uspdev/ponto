@@ -18,10 +18,7 @@
         @foreach($monitores as $key => $value)
         <tr>
             <td>{{ $key }}</td>
-            <td>
-              <!-- <img style="width: 80px; float: left;" src="data:image/png;base64, {{-- \Uspdev\Wsfoto::obter($key) --}}" alt="foto"> -->
-              <a href="/monitores/{{ $key }}">{{ $value }}</a>
-            </td>
+            <td><a href="/monitores/{{ $key }}">{{ $value }}</a></td>
         </tr>
         @endforeach
       </tbody>

@@ -26,9 +26,13 @@ class MonitorController extends Controller
         $this->authorize('admin');
         $monitor['codpes'] = explode('/', url()->current())[4];
         $monitor['nompes'] = Pessoa::obterNome($monitor['codpes']);
+        $emails = Pessoa::emails($monitor['codpes']);
+        $telefones = Pessoa::telefones($monitor['codpes']);
         $registros = Registro::all()->where('created_at', '>=', \Carbon\Carbon::today())->where('codpes', '=', $monitor['codpes']);
         return view('monitores.show',[
             'monitor' => $monitor,
+            'emails' => $emails,
+            'telefones' => $telefones,
             'registros' => $registros
         ]);
     }
