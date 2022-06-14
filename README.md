@@ -39,5 +39,5 @@ Cadastre uma nova URL no configurador de senha única utilizando o caminho https
 
 ## Histórico
 
-14/06/2022 - Exibindo informações e foto do registro
-31/05/2022 - Código da sala de monitoria parametrizado
+- 14/06/2022 - Exibindo informações e foto do registro
+- 31/05/2022 - Código da sala de monitoria parametrizado
