@@ -31,13 +31,13 @@ Cadastre uma nova URL no configurador de senha única utilizando o caminho https
 
 * DEV
 
-    php artisan migrate:fresh --seed
+    `php artisan migrate:fresh --seed`
 
 * Produção
 
-    php artisan migrate
+    `php artisan migrate`
 
 ## Histórico
 
+14/06/2022 - Exibindo informações e foto do registro
 31/05/2022 - Código da sala de monitoria parametrizado
-
