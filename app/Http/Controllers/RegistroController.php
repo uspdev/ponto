@@ -33,7 +33,6 @@ class RegistroController extends Controller
         ]);
     }
 
-
     public function store(RegistroRequest $request)
     {
         $validated = $request->validated();
@@ -43,7 +42,7 @@ class RegistroController extends Controller
         $image = str_replace(' ', '+', $image);
         $now = new DateTime();
         $image_name = $validated['codpes'] . '_' . $now->getTimestamp(). '.png';
-        Storage::put($image_name, base64_decode($image));
+        Storage::put(config('ponto.pathPictures') . '/' . $image_name, base64_decode($image));
 
         $registro = new Registro;
         $registro->codpes = $validated['codpes'];
@@ -70,5 +69,13 @@ class RegistroController extends Controller
         return redirect('/');
     }
 
-    
+    public function show()
+    {
+        $this->authorize('admin');
+        $registroId = explode('/', url()->current())[4];
+        $registro = Registro::find($registroId);
+        return view('registros.show', [
+            'registro' => $registro
+        ]);
+    }
 }

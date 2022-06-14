@@ -2,17 +2,17 @@
 
 $menu = [
     [
-        'text' => '<i class="fa fa-business-time"></i> Registrar ponto',
+        'text' => '<i class="fa fa-user-clock"></i> Registrar ponto',
         'url' => '/registros/create',
-    ],
-    [
-        'text' => '<i class="fa fa-building"></i> Locais',
-        'url'  => '/places',
-        'can'  => 'admin'
     ],
     [
         'text' => '<i class="fa fa-user-tie"></i> Monitores',
         'url'  => '/monitores',
+        'can'  => 'admin'
+    ],
+    [
+        'text' => '<i class="fa fa-building"></i> Locais',
+        'url'  => '/places',
         'can'  => 'admin'
     ],
 ];
@@ -23,7 +23,6 @@ $right_menu = [
         'key' => 'senhaunica-socialite',
     ],
 ];
-
 
 return [
     # valor default para a tag title, dentro da section title.

@@ -7,6 +7,12 @@
         Registrar ponto
     </div>
     <div class="card-body">
+        <div class="w-100 text-center mb-2">
+            <span class="badge badge-pill badge-info mb-2" style="font-size: 1.2em;">
+                {{ \Carbon\Carbon::now()->translatedFormat('l\, d \d\e F \d\e Y') }}</span>
+            <span class="badge badge-pill badge-success" style="font-size: 1.2em;"><i class="fas fa-clock"></i>
+                {{ \Carbon\Carbon::now()->format('H:i') }}</span>
+        </div>
         @include('registros.partials.foto')
         <form method="POST" action="/registros" enctype="multipart/form-data">
             @csrf
@@ -42,9 +48,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-business-time"></i> Registrar</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-user-clock"></i> Registrar</button>
                     </div>
-
                 </div>
             </div>
         </form>

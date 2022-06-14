@@ -11,6 +11,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "symfony/filesystem": "^5.4",
         "uspdev/laravel-usp-theme": "^2.5",
         "uspdev/replicado": "^1.13",
         "uspdev/senhaunica-socialite": "^4.3",
@@ -20,6 +21,7 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
+        "lucascudo/laravel-pt-br-localization": "^1.2",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"
@@ -40,6 +42,7 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan vendor:publish --provider=\"Uspdev\\UspTheme\\ServiceProvider\" --tag=assets --force",
+            "@php artisan vendor:publish --tag=laravel-pt-br-localization",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
