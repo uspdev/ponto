@@ -17,8 +17,7 @@
             <i class="fas fa-sign-in-alt text-danger"></i> {{ $registro->created_at->format('H:i:s') }} (Saída)
         @endif
         <br />
-        {{-- // TODO: Na rota pictures os arquivos das fotos não podem ser públicos --}}
-        <img src="pictures/{{ $registro->image }}" class="rounded img-thumbnail p-3 mt-3" alt="Foto">
+        <img src="/registros/{{ $registro->id }}/picture" class="rounded img-thumbnail p-3 mt-3" alt="Foto">
     </div>
 </div>
 

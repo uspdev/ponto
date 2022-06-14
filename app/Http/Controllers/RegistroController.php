@@ -78,4 +78,12 @@ class RegistroController extends Controller
             'registro' => $registro
         ]);
     }
+
+    public function picture()
+    {
+        $this->authorize('admin');
+        $registroId = explode('/', url()->current())[4];
+        $registro = Registro::find($registroId);
+        return Storage::download('/pictures/' . $registro->image);
+    }
 }
