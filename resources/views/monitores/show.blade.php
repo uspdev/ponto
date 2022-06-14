@@ -32,7 +32,7 @@
       <div class="col-lg-7 p-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Registros: {{ \Carbon\Carbon::today()->translatedFormat('l\, d \d\e F \d\e Y') }}</h5>
+            <h5 class="card-title">Registros: {{ \Carbon\Carbon::today()->translatedFormat('l, d \d\e F \d\e Y') }}</h5>
             <ul class="list-group list-group-flush">
               @foreach ($registros as $registro)
                   <li class="list-group-item">
