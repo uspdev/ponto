@@ -22,7 +22,7 @@
                             <i class="fas fa-sign-out-alt text-danger"></i> {{ $registro->created_at->format('H:i') }} (Saída)
                         @endif
                         - {{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}
-                        @if (config('ponto.fotoMonitor') == 1)
+                        @if (config('ponto.fotoMonitor') == 1 or Auth::check())
                             <a href="" data-toggle="modal" data-target="#modalFoto"
                                 data-whatever="{{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}, {{ \Uspdev\Wsfoto::obter($registro->codpes) }}">
                                 <i class="fas fa-portrait fa-lg text-info"></i>
