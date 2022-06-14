@@ -11,6 +11,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "symfony/filesystem": "^5.4",
         "uspdev/laravel-usp-theme": "^2.5",
         "uspdev/replicado": "^1.13",
         "uspdev/senhaunica-socialite": "^4.3",

@@ -42,7 +42,7 @@ class RegistroController extends Controller
         $image = str_replace(' ', '+', $image);
         $now = new DateTime();
         $image_name = $validated['codpes'] . '_' . $now->getTimestamp(). '.png';
-        Storage::put($image_name, base64_decode($image));
+        Storage::put(config('ponto.pathPictures') . '/' . $image_name, base64_decode($image));
 
         $registro = new Registro;
         $registro->codpes = $validated['codpes'];
