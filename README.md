@@ -5,7 +5,7 @@ Registro de ponto de monitores das salas Pró-Aluno.
 
 * Registro de ponto com foto.
 
-### Em produção
+## Em produção
 
 Para receber as últimas atualizações do sistema rode:
 
