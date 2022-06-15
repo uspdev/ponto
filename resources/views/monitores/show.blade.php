@@ -39,11 +39,11 @@
                     <i class="fa fa-building fa-lg ml-1"></i> {{ \App\Models\Place::find($registro->place_id)->name }}
                     @if($registro->type == 'in')
                       <i class="fas fa-sign-in-alt text-success"></i> {{ $registro->created_at->format('H:i') }} (Entrada)
-                      <a href="/registros/{{ $registro->id }}"><i class="fa fa-camera fa-lg text-info ml-1"></i></a>
+                      <a href="/registros/{{ $registro->id }}"><i class="fa fa-eye fa-lg text-info ml-1"></i></a>
                     @endif
                     @if($registro->type == 'out')
                         <i class="fas fa-sign-out-alt text-danger"></i> {{ $registro->created_at->format('H:i') }} (Saída)
-                        <a href="/registros/{{ $registro->id }}"><i class="fa fa-camera fa-lg text-info ml-1"></i></a>
+                        <a href="/registros/{{ $registro->id }}"><i class="fa fa-eye fa-lg text-info ml-1"></i></a>
                     @endif
                   </li>
               @endforeach
