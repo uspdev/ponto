@@ -44,8 +44,8 @@
             <ul class="list-group list-group-flush">
               @foreach ($registros as $registro)
                   <li class="list-group-item">
-                    <i class="fa fa-building fa-lg ml-1"></i> {{ \App\Models\Place::find($registro->place_id)->name }}
-                    {{ $registro->created_at->format('d/m/Y') }}
+                    <i class="fa fa-building fa-lg ml-1"></i> {{ \App\Models\Place::find($registro->place_id)->name }} -
+                    {{ $registro->created_at->format('d/m/Y') }} -
                     @if($registro->type == 'in')
                       <i class="fas fa-sign-in-alt text-success"></i> {{ $registro->created_at->format('H:i') }} (Entrada)
                       <a href="/registros/{{ $registro->id }}"><i class="fa fa-eye fa-lg text-info ml-1"></i></a>
