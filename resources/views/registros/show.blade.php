@@ -20,5 +20,4 @@
         <img src="/registros/{{ $registro->id }}/picture" class="rounded img-thumbnail p-3 mt-3" alt="Foto">
     </div>
 </div>
-
 @endsection
