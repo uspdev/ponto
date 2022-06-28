@@ -84,6 +84,7 @@ class RegistroController extends Controller
         $this->authorize('admin');
         $registroId = explode('/', url()->current())[4];
         $registro = Registro::find($registroId);
-        return Storage::download('/pictures/' . $registro->image);
+        $path = (config('ponto.pathPictures') == 'pictures') ? '/pictures/' : '/';
+        return Storage::download($path . $registro->image);
     }
 }
