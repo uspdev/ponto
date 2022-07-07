@@ -36,6 +36,7 @@
                         @else
                             Não há monitor(a) no local
                         @endif
+
                         {{-- Se foi parametrizado para mostrar foto do monitor --}}
                         @if (config('ponto.fotoMonitor') == 1)
                             <a href="#" data-toggle="modal" data-target="#modalFotoMonitor" title="Mostrar foto do monitor"

@@ -30,22 +30,8 @@ class RegistroRequest extends FormRequest
             'dias' => 'required',
         ];
         return $rules;
-        
-        $monitores = ReplicadoTemp::listarMonitores(config('ponto.codslamon'));
-        return [
-            'codpes'   => ['required','integer',Rule::in($monitores)],
-            'foto'     => 'required',
-            'place_id' => ['required','integer',Rule::in(Place::pluck('id')->toArray())],
-        ];
 
     }
 
-    public function messages()
-    {
-        return [
-            'codpes.required' => 'Número USP obrigatório',
-            'codpes.*' => 'Número USP não pertence a um(a) monitor(a)',
-            'foto.required' => 'Foto Obrigatória',
-        ];
-    }
+    
 }
