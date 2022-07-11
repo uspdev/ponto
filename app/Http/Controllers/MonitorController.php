@@ -33,10 +33,14 @@ class MonitorController extends Controller
         $telefones = Pessoa::telefones($monitor['codpes']);
         
         if(!empty($request->in) and !empty($request->out)){
-            // TODO: Flávia - VALIDAR formato: dd/mm/ano
 
             $in = Carbon::createFromFormat('d/m/Y',$request->in);
             $out = Carbon::createFromFormat('d/m/Y',$request->out);
+
+            $request->validate([
+                'in' => 'required|date_format:d/m/Y',
+                'out' => 'required|date_format:d/m/Y'
+            ]);
 
             $horas = [];
             $dias = CarbonPeriod::create($in, $out);
@@ -50,6 +54,8 @@ class MonitorController extends Controller
                 if($registros_do_dia->isNotEmpty()){
                     // Computar as horas para aquele dia
                     $x = '';
+
+                    //$d = '';
                     //$d = $out->diffInHours($in);
                     
                     foreach($registros_do_dia as $registro){
@@ -77,7 +83,7 @@ class MonitorController extends Controller
             'monitor' => $monitor,
             'emails' => $emails,
             'telefones' => $telefones,
-            'registros' => $registros
+            'registros' => $registros,
               ]);
      }
 
