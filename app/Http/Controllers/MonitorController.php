@@ -34,13 +34,13 @@ class MonitorController extends Controller
         
         if(!empty($request->in) and !empty($request->out)){
 
-            $in = Carbon::createFromFormat('d/m/Y',$request->in);
-            $out = Carbon::createFromFormat('d/m/Y',$request->out);
-
             $request->validate([
                 'in' => 'required|date_format:d/m/Y',
                 'out' => 'required|date_format:d/m/Y'
             ]);
+
+            $in = Carbon::createFromFormat('d/m/Y',$request->in);
+            $out = Carbon::createFromFormat('d/m/Y',$request->out);
 
             $horas = [];
             $dias = CarbonPeriod::create($in, $out);
@@ -51,25 +51,12 @@ class MonitorController extends Controller
                     ->where('codpes', '=', $monitor['codpes'])
                     ->get();
                      
-                if($registros_do_dia->isNotEmpty()){
+                if($registros_do_dia->isNotEmpty() ){
 
                     $x = '';
-                   //$start = CarbonPeriod::create($in);
-                    //$finish = CarbonPeriod::create($out);
-
-                   //$total = $finish->diffInHours($start);
-
-                    //ou 
-
-                    //$totals = CarbonPeriod::create($in, $out);
-
-                    //foreach($totals as $total){
-                    //$total = $out->diffInHours($in);
-                    //}
-                    
                     foreach($registros_do_dia as $registro){
                        $created_at = Carbon::parse($registro->created_at);
-                       $x = $x . $created_at->format('H:i') . $registro->type; 
+                       $x = $x . $created_at->format('H:i') . $registro->type;
                     }
                     array_push($horas,$dia->format('Y-m-d') .  $x);
                 }

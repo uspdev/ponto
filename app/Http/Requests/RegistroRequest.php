@@ -25,12 +25,7 @@ class RegistroRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        $rules = [
-            'dias' => 'required',
-        ];
-        return $rules;
-        
+    {   
         $monitores = ReplicadoTemp::listarMonitores(config('ponto.codslamon'));
         return [
             'codpes'   => ['required','integer',Rule::in($monitores)],
