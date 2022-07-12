@@ -32,7 +32,7 @@
       <div class="col-lg-7 p-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Selecione a data do registro:</h5>
+            <h5 class="card-title">Insira a data do(s) registro(s):</h5>
             @section('flash')
             @if ($errors->any())
               <div class="alert alert-danger">

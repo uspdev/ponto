@@ -52,11 +52,20 @@ class MonitorController extends Controller
                     ->get();
                      
                 if($registros_do_dia->isNotEmpty()){
-                    // Computar as horas para aquele dia
-                    $x = '';
 
-                    //$d = '';
-                    //$d = $out->diffInHours($in);
+                    $x = '';
+                   //$start = CarbonPeriod::create($in);
+                    //$finish = CarbonPeriod::create($out);
+
+                   //$total = $finish->diffInHours($start);
+
+                    //ou 
+
+                    //$totals = CarbonPeriod::create($in, $out);
+
+                    //foreach($totals as $total){
+                    //$total = $out->diffInHours($in);
+                    //}
                     
                     foreach($registros_do_dia as $registro){
                        $created_at = Carbon::parse($registro->created_at);
