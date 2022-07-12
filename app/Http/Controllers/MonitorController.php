@@ -33,14 +33,14 @@ class MonitorController extends Controller
         $telefones = Pessoa::telefones($monitor['codpes']);
         
         if(!empty($request->in) and !empty($request->out)){
-
-            $in = Carbon::createFromFormat('d/m/Y',$request->in);
-            $out = Carbon::createFromFormat('d/m/Y',$request->out);
-
+            
             $request->validate([
                 'in' => 'required|date_format:d/m/Y',
                 'out' => 'required|date_format:d/m/Y'
             ]);
+
+            $in = Carbon::createFromFormat('d/m/Y',$request->in);
+            $out = Carbon::createFromFormat('d/m/Y',$request->out);
 
             $horas = [];
             $dias = CarbonPeriod::create($in, $out);
