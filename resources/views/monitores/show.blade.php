@@ -45,9 +45,9 @@
             @endif
             @endsection
             <form method="GET">
-              Início: <input name="in"><br>
+              Início: <input name="in" value="{{ request()->in }}"><br>
               <br>
-              Fim: <input name="out">
+              Fim: <input name="out" value="{{ request()->out }}">
             <button type="submit">Filtrar</button>
            <br>
            <div class="card">
