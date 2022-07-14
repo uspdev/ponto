@@ -87,4 +87,5 @@ class RegistroController extends Controller
         $path = (config('ponto.pathPictures') == 'pictures') ? '/pictures/' : '/';
         return Storage::download($path . $registro->image);
     }
-}
+
+ }

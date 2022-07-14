@@ -32,6 +32,7 @@ class RegistroRequest extends FormRequest
             'foto'     => 'required',
             'place_id' => ['required','integer',Rule::in(Place::pluck('id')->toArray())],
         ];
+
     }
 
     public function messages()

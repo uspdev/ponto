@@ -32,24 +32,44 @@
       <div class="col-lg-7 p-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Registros: {{ \Carbon\Carbon::today()->translatedFormat('l, d \d\e F \d\e Y') }}</h5>
-            <ul class="list-group list-group-flush">
-              @foreach ($registros as $registro)
+            <h5 class="card-title">Insira a data do(s) registro(s):</h5>
+            @section('flash')
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                 @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                 @endforeach
+                </ul>
+             </div>
+            @endif
+            @endsection
+            <form method="GET">
+              Início: <input name="in" value="{{ request()->in }}"><br>
+              <br>
+              Fim: <input name="out" value="{{ request()->out }}">
+            <button type="submit">Filtrar</button>
+           <br>
+           <div class="card">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+               @foreach ($registros as $registro)
                   <li class="list-group-item">
                     @if($registro->type == 'in')
-                      <i class="fas fa-sign-in-alt text-success"></i> <a href="/registros/{{ $registro->id }}">{{ $registro->created_at->format('H:i') }} (Entrada)</a>
+                      <i class="fas fa-sign-in-alt text-success"></i> <a href="/registros/{{ $registro->id }}">{{ $registro->created_at->format('d/m/Y - H:i') }} (Entrada)</a>
                     @endif
                     @if($registro->type == 'out')
-                        <i class="fas fa-sign-out-alt text-danger"></i> <a href="/registros/{{ $registro->id }}">{{ $registro->created_at->format('H:i') }} (Saída)</a>
+                        <i class="fas fa-sign-out-alt text-danger"></i> <a href="/registros/{{ $registro->id }}">{{ $registro->created_at->format('d/m/Y - H:i') }} (Saída)</a>
                     @endif
                   </li>
-              @endforeach
-            </ul>
+               @endforeach
+               </ul>
+             </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 @endsection
