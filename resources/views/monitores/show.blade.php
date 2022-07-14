@@ -45,24 +45,10 @@
             @endif
             @endsection
             <form method="GET">
-              Início: <input name="in"><br>
+              Início: <input name="in" value="{{ request()->in }}"><br>
               <br>
-              Fim: <input name="out">
+              Fim: <input name="out" value="{{ request()->out }}">
             <button type="submit">Filtrar</button>
-
-            @section('flash')
-              @if(!is_numeric('in' && 'out'))
-              <div class="alert alert-danger">
-                <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                 @endforeach
-                </ul>
-             </div>
-            @endif
-            @endsection
-            </form>
-
            <br>
            <div class="card">
             <div class="card-body">

@@ -33,7 +33,7 @@ class MonitorController extends Controller
         $telefones = Pessoa::telefones($monitor['codpes']);
         
         if(!empty($request->in) and !empty($request->out)){
-
+            
             $request->validate([
                 'in' => 'required|date_format:d/m/Y',
                 'out' => 'required|date_format:d/m/Y'
@@ -41,27 +41,6 @@ class MonitorController extends Controller
 
             $in = Carbon::createFromFormat('d/m/Y',$request->in);
             $out = Carbon::createFromFormat('d/m/Y',$request->out);
-
-            $horas = [];
-            $dias = CarbonPeriod::create($in, $out);
-
-            foreach ($dias as $dia) {
-                
-                $registros_do_dia = Registro::whereDate('created_at',$dia)
-                    ->where('codpes', '=', $monitor['codpes'])
-                    ->get();
-                     
-                if($registros_do_dia->isNotEmpty() ){
-
-                    $x = '';
-                    foreach($registros_do_dia as $registro){
-                       $created_at = Carbon::parse($registro->created_at);
-                       $x = $x . $created_at->format('H:i') . $registro->type;
-                    }
-                    array_push($horas,$dia->format('Y-m-d') .  $x);
-                }
-                
-            }
 
             $registros = Registro::where('created_at', '>=', $in)
                 ->where('created_at', '<=', $out)
