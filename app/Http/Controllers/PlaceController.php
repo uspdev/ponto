@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Http\Requests\PlaceRequest;
 use App\Models\Place;
+use App\Models\Registro;
+use App\Models\Ocorrencia;
 
 class PlaceController extends Controller
 {
@@ -49,7 +53,7 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        //
+
     }
 
     /**

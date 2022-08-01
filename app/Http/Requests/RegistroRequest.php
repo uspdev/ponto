@@ -25,7 +25,7 @@ class RegistroRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
         $monitores = ReplicadoTemp::listarMonitores(config('ponto.codslamon'));
         return [
             'codpes'   => ['required','integer',Rule::in($monitores)],
