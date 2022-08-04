@@ -4,7 +4,6 @@
         @if (count($places) > 1)
         <option value="" selected="">Selecione o local ...</option>
         @endif
-
     @foreach ($places as $place)
     @if(old('place_id') == '' and isset($ocorrencia->place_id))
     <option value="{{ $place->id }}"
@@ -17,7 +16,6 @@
     @endif
     @endforeach
     </select>
-
 </div>
 <b>Ocorrência: </b><br>
 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ocorrencia"
