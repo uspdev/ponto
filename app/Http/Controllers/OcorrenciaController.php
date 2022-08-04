@@ -16,6 +16,8 @@ class OcorrenciaController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
+
         $ocorrencias = Ocorrencia::all();
         return view('ocorrencias.index', [
             'ocorrencias' => $ocorrencias,
@@ -46,6 +48,8 @@ class OcorrenciaController extends Controller
      */
     public function store(OcorrenciaRequest $request)
     {
+        $this->authorize('admin');
+
         $validated = $request->validated();
         $validated['user_id'] = auth()->user()->id;
         $ocorrencia = Ocorrencia::create($validated);
@@ -61,6 +65,8 @@ class OcorrenciaController extends Controller
      */
     public function show(Ocorrencia $ocorrencia)
     {
+        $this->authorize('admin');
+
         return view('ocorrencias.show',[
             'ocorrencia' => $ocorrencia,
             'places' => Place::all(),
@@ -93,17 +99,21 @@ class OcorrenciaController extends Controller
      */
     public function update(OcorrenciaRequest $request, Ocorrencia $ocorrencia)
     {
+        $this->authorize('admin');
+
         $validated = $request->validated();
         $ocorrencia->update($validated);
         request()->session()->flash('alert-info','Ocorrência atualizada com sucesso');
         return redirect("/ocorrencias/{$ocorrencia->id}");
     }
 
-    public function destroy(Ocorrencia $ocorrencia)
-    {
-    $ocorrencia->delete();
-    return redirect('/ocorrencias');
-    }
+        public function destroy(Ocorrencia $ocorrencia)
+        {
+        $this->authorize('admin');
+
+        $ocorrencia->delete();
+        return redirect('/ocorrencias');
+        }
 
     /**
      * Remove the specified resource from storage.
