@@ -30,4 +30,11 @@ class OcorrenciaRequest extends FormRequest
 
             return $rules;
         }
+
+    public function messages()
+    {
+        return [
+            'place_id.required' => 'O campo "Local" é obrigatório.'
+        ];
+    }
 }

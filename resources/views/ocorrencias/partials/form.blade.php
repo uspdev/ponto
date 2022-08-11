@@ -1,3 +1,4 @@
+<form>
 <div class="form-group">
     <label for="place_id"><b>Local</b></label>
         <select name="place_id">
@@ -22,4 +23,4 @@
 placeholder="Digite o ocorrido...">{{ old('ocorrencia', $ocorrencia->ocorrencia) }}</textarea>
 <br>
 <button type="submit" class="btn btn-primary">Enviar</button>
-
+</form>

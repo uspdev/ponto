@@ -26,6 +26,5 @@ Route::get('ocorrencias/{ocorrencia}/edit', [OcorrenciaController::class, 'edit'
 Route::patch('ocorrencias/{ocorrencia}/', [OcorrenciaController::class, 'update']);
 Route::get('ocorrencias', [OcorrenciaController::class, 'index']);
 Route::delete('ocorrencias/{ocorrencia}', [OcorrenciaController::class, 'destroy']);
-
 Route::get('monitores', [MonitorController::class,'index']);
 Route::get('monitores/{monitor}', [MonitorController::class,'show']);

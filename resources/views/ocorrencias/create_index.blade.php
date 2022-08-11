@@ -12,7 +12,6 @@
     </tr>
   </thead>
   <tbody>
-    @foreach($ocorrencias as $ocorrencia)
     <tr>
       <td><a href="ocorrencias/{{$ocorrencia->id}}">{{ $ocorrencia->user->name }}</a></td>
       <td>{{ $ocorrencia->place->name }}</td>
@@ -25,7 +24,6 @@
             <button type="submit" onclick="return confirm('Tem certeza que deseja excluir essa ocorrência?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>
       </form></td>
     </tr>
-  @endforeach
   </tbody>
 </table>
 </div>

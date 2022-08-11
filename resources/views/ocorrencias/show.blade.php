@@ -1,6 +1,6 @@
 @extends('main')
 @section('content')
 
-@include('ocorrencias.partials.fields')
+@include('ocorrencias.create_index')
 
 @endsection

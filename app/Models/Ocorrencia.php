@@ -10,7 +10,7 @@ use App\Models\User;
 class Ocorrencia extends Model
 {
     use HasFactory;
-    protected $fillable = ['codpes', 'ocorrencia', 'place_id', 'user_id'];
+    protected $fillable = ['ocorrencia', 'place_id', 'user_id'];
 
     public function place(){
         return $this->belongsTo(Place::class);
