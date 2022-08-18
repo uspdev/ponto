@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class MonitorSeeder extends Seeder
+class OcorrenciaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class MonitorSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Ocorrencia::factory(5)->create();
     }
 }

@@ -15,6 +15,27 @@ $menu = [
         'url'  => '/places',
         'can'  => 'admin'
     ],
+    [
+        'text' => 'Ocorrências',
+        'can' => 'admin',    
+        
+            'submenu' => [
+                [
+                    'text' => 'Registrar ocorrência',
+                    'url'  => '/ocorrencias/create',
+                    'can'  => 'admin'
+                ],
+                [
+                    'type' => 'divider',
+                ],
+                [
+                    'text' => 'Registradas',
+                    'url'  => '/ocorrencias',
+                    'can'  => 'admin',
+                ],
+            ],
+        ],
+        
 ];
 
 $right_menu = [

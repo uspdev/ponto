@@ -13,6 +13,6 @@ class PlaceSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Place::factory(5)->create();
     }
 }

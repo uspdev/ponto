@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "756549b63cbcd02a754511cdf987d8e3",
+    "content-hash": "b70777491daefd5358a2bc04e471e027",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5982,6 +5982,53 @@
                 "source": "https://github.com/uspdev/cache/tree/0.7.3"
             },
             "time": "2021-04-07T23:14:52+00:00"
+        },
+        {
+            "name": "uspdev/laravel-usp-faker",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/laravel-usp-faker.git",
+                "reference": "f55f0b566d3ac61db9a7de6ac482ebcf7a791ca3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/laravel-usp-faker/zipball/f55f0b566d3ac61db9a7de6ac482ebcf7a791ca3",
+                "reference": "f55f0b566d3ac61db9a7de6ac482ebcf7a791ca3",
+                "shasum": ""
+            },
+            "require": {
+                "uspdev/replicado": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Uspdev\\UspdevFakerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Veríssimo",
+                    "email": "verissimotgv@gmail.com"
+                }
+            ],
+            "description": "Uma biblioteca para geração de faker no contexto USP",
+            "support": {
+                "issues": "https://github.com/uspdev/laravel-usp-faker/issues",
+                "source": "https://github.com/uspdev/laravel-usp-faker/tree/1.0.6"
+            },
+            "time": "2020-09-23T20:35:34+00:00"
         },
         {
             "name": "uspdev/laravel-usp-theme",
