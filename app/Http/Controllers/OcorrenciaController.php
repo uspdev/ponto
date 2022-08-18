@@ -18,7 +18,7 @@ class OcorrenciaController extends Controller
     {
         $this->authorize('admin');
 
-        $ocorrencias = Ocorrencia::all();
+        $ocorrencias = Ocorrencia::with('place','user')->get();
         return view('ocorrencias.index', [
             'ocorrencias' => $ocorrencias,
             'places' => Place::all(),
@@ -35,7 +35,7 @@ class OcorrenciaController extends Controller
         $this->authorize('admin');
 
         return view('ocorrencias.create', [
-            'ocorrencia' => new Ocorrencia, 
+            'ocorrencia' => new Ocorrencia,
             'places' => Place::all(),
             ]);
     }
@@ -90,7 +90,7 @@ class OcorrenciaController extends Controller
         ]);
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
