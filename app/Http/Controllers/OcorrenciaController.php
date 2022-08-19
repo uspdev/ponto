@@ -17,7 +17,8 @@ class OcorrenciaController extends Controller
     public function index()
     {
         $this->authorize('logado');
-        $ocorrencias = Ocorrencia::paginate(5);
+
+        $ocorrencias = Ocorrencia::with('place','user')->paginate(5);
         return view('ocorrencias.index', [
             'ocorrencias' => $ocorrencias,
             'places' => Place::all(),
@@ -33,7 +34,7 @@ class OcorrenciaController extends Controller
     {
         $this->authorize('logado');
         return view('ocorrencias.create', [
-            'ocorrencia' => new Ocorrencia, 
+            'ocorrencia' => new Ocorrencia,
             'places' => Place::all(),
             ]);
     }
@@ -85,7 +86,7 @@ class OcorrenciaController extends Controller
         ]);
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
