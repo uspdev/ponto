@@ -22,11 +22,12 @@
       <form method="POST" action="/ocorrencias/{{$ocorrencia->id}}/">
         @csrf
         @method('delete')
-            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir essa ocorrência?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>
+          <button type="submit" onclick="return confirm('Tem certeza que deseja excluir essa ocorrência?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>
       </form></td>
     </tr>
   @endforeach
   </tbody>
 </table>  
 </div>
+
 {{ $ocorrencias->appends(request()->query())->links() }}

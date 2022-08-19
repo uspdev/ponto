@@ -27,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('logado', function ($user) {
             return true;
+            
         });
     }
 }
