@@ -27,5 +27,6 @@
     </tr>
   @endforeach
   </tbody>
-</table>
+</table>  
 </div>
+{{ $ocorrencias->appends(request()->query())->links() }}

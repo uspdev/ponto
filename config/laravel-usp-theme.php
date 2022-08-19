@@ -17,13 +17,13 @@ $menu = [
     ],
     [
         'text' => 'Ocorrências',
-        'can' => 'admin',    
+        'can' => 'logado',
         
             'submenu' => [
                 [
                     'text' => 'Registrar ocorrência',
                     'url'  => '/ocorrencias/create',
-                    'can'  => 'admin'
+                    'can' => 'logado',
                 ],
                 [
                     'type' => 'divider',
@@ -31,10 +31,10 @@ $menu = [
                 [
                     'text' => 'Registradas',
                     'url'  => '/ocorrencias',
-                    'can'  => 'admin',
+                    'can' => 'logado',
                 ],
             ],
-        ],
+    ],
         
 ];
 
