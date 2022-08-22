@@ -25,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('logado', function ($user) {
+            return true;
+            
+        });
     }
 }

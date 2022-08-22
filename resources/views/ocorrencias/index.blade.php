@@ -1,5 +1,6 @@
 @extends('main')
 @section('content')
 
-    @include('ocorrencias.partials.fields') 
+@include('ocorrencias.partials.fields') 
+
 @endsection
