@@ -14,10 +14,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 @php
-                    // Se logado
-                    if (Auth::check()) {
-                        $registros = $place->registros->where('created_at', '>=', \Carbon\Carbon::today())->sortByDesc('id')->take(1);
-                    }
+                    $registros = $place->registros->where('created_at', '>=', \Carbon\Carbon::today());
                 @endphp
                 @forelse ($registros as $registro)
                     <li class="list-group-item">
