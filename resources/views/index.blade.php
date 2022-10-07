@@ -16,10 +16,6 @@
                 @php
                     // Se logado
                     if (Auth::check()) {
-                        // Traz todos os registros do dia no local
-                        $registros = $place->registros->where('created_at', '>=', \Carbon\Carbon::today());
-                    } else {
-                        // Traz somente o último registro do dia no local
                         $registros = $place->registros->where('created_at', '>=', \Carbon\Carbon::today())->sortByDesc('id')->take(1);
                     }
                 @endphp
