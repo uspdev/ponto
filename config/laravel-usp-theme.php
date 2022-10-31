@@ -33,6 +33,14 @@ $menu = [
                     'url'  => '/ocorrencias',
                     'can' => 'logado', 
                 ],
+                [
+                    'type' => 'divider',
+                ],
+                [
+                    'text' => 'Resolvidas',
+                    'url'  => '/ocorrencias/solved',
+                    'can' => 'logado', 
+                ],
             ],
     ],
         
