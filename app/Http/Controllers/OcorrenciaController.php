@@ -125,7 +125,7 @@ class OcorrenciaController extends Controller
         return back();
     }
 
-    public function index_solved(){
+    public function indexSolved(){
 
         $this->authorize('logado');
 
