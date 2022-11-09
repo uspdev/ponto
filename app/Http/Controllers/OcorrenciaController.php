@@ -18,7 +18,11 @@ class OcorrenciaController extends Controller
     {
         $this->authorize('logado');
 
-        $ocorrencias = Ocorrencia::with('place','user')->paginate(5);
+        $ocorrencias = Ocorrencia::with('place','user')
+                                ->where('status', '=', 'pending')
+                                ->orderBy('id', 'DESC')
+                                ->paginate(5);
+
         return view('ocorrencias.index', [
             'ocorrencias' => $ocorrencias,
             'places' => Place::all(),
@@ -110,10 +114,30 @@ class OcorrenciaController extends Controller
         return redirect('/ocorrencias');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ocorrencia  $ocorrencia
-     * @return \Illuminate\Http\Response
-     */
+    public function solved(Ocorrencia $ocorrencia)
+    {
+        $this->authorize('logado');
+
+        $ocorrencia->fill([
+           'status' => 'solved'
+        ]);
+        $ocorrencia->save();
+
+        return back();
+    }
+
+    public function indexSolved(){
+
+        $this->authorize('logado');
+
+        $ocorrencias = Ocorrencia::where('status', 'solved')
+                                    ->orderBy('id', 'DESC')
+                                    ->paginate(5);
+
+        return view('ocorrencias.solved', [
+            'ocorrencias' => $ocorrencias,
+            'places' => Place::all(),
+        ]);
+    }
+
 }

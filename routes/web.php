@@ -20,11 +20,14 @@ Route::post('places', [PlaceController::class,'store']);
 Route::get('places', [PlaceController::class,'index']);
 
 Route::get('ocorrencias/create', [OcorrenciaController::class, 'create']);
+Route::get('ocorrencias', [OcorrenciaController::class, 'index']);
 Route::post('ocorrencias/', [OcorrenciaController::class, 'store']);
+Route::post('ocorrencias/{ocorrencia}/solved', [OcorrenciaController::class, 'solved']);
+Route::get('ocorrencias/solved', [OcorrenciaController::class, 'indexSolved']);
 Route::get('ocorrencias/{ocorrencia}', [OcorrenciaController::class, 'show']);
 Route::get('ocorrencias/{ocorrencia}/edit', [OcorrenciaController::class, 'edit']);
 Route::patch('ocorrencias/{ocorrencia}/', [OcorrenciaController::class, 'update']);
-Route::get('ocorrencias', [OcorrenciaController::class, 'index']);
 Route::delete('ocorrencias/{ocorrencia}', [OcorrenciaController::class, 'destroy']);
+
 Route::get('monitores', [MonitorController::class,'index']);
 Route::get('monitores/{monitor}', [MonitorController::class,'show']);

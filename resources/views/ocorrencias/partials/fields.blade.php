@@ -2,7 +2,7 @@
     <div class="card-header font-weight-bold">
         Ocorrências
     </div>
-    <table class="table table-bordered">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">Registrada por:</th>
@@ -19,11 +19,16 @@
       <td>{{ $ocorrencia->ocorrencia }}</td>
       <td align="center">
         <a href="/ocorrencias/{{$ocorrencia->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
-      <form method="POST" action="/ocorrencias/{{$ocorrencia->id}}/">
-        @csrf
-        @method('delete')
-          <button type="submit" onclick="return confirm('Tem certeza que deseja excluir essa ocorrência?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>
-      </form></td>
+          <form method="POST" action="/ocorrencias/{{$ocorrencia->id}}/">
+            @csrf
+            @method('delete')
+            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir essa ocorrência?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>
+          </form>
+          <form method="POST" action="ocorrencias/{{$ocorrencia->id}}/solved">
+            @csrf
+            <button type="submit" class="btn btn-success">Resolvida</button>
+          </form>
+      </td>   
     </tr>
   @endforeach
   </tbody>
