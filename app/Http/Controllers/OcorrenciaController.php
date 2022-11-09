@@ -22,6 +22,7 @@ class OcorrenciaController extends Controller
                                 ->where('status', '=', 'pending')
                                 ->orderBy('id', 'DESC')
                                 ->paginate(5);
+
         return view('ocorrencias.index', [
             'ocorrencias' => $ocorrencias,
             'places' => Place::all(),
@@ -132,16 +133,11 @@ class OcorrenciaController extends Controller
         $ocorrencias = Ocorrencia::where('status', 'solved')
                                     ->orderBy('id', 'DESC')
                                     ->paginate(5);
+
         return view('ocorrencias.solved', [
             'ocorrencias' => $ocorrencias,
             'places' => Place::all(),
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ocorrencia  $ocorrencia
-     * @return \Illuminate\Http\Response
-     */
 }
