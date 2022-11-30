@@ -49,7 +49,9 @@
               <br>
               Fim: <input name="out" value="{{ request()->out }}">
             <button type="submit">Filtrar</button>
-           <br>
+           
+            <br>
+           
            <div class="card">
             <div class="card-body">
               <ul class="list-group list-group-flush">
