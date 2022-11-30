@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header font-weight-bold">
-    {{ $monitor['codpes'] }} {{ $monitor['nompes'] }}
+    {{ $pessoa['codpes'] }} {{ $pessoa['nompes'] }}
   </div>
   <div class="card-body">
     <div class="row">
@@ -12,7 +12,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Foto</h5>
-            <img style="width: 100px; float: left;" src="data:image/png;base64, {{ \Uspdev\Wsfoto::obter($monitor['codpes']) }}" alt="foto">
+            <img style="width: 100px; float: left;" src="data:image/png;base64, {{ \Uspdev\Wsfoto::obter($pessoa['codpes']) }}" alt="foto">
           </div>
         </div>
       </div>

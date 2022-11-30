@@ -4,10 +4,10 @@
 
 <div class="card">
   <div class="card-header font-weight-bold">
-    Monitores
+    Pessoas
   </div>
   <div class="card-body">
-    <table class="table table-sm table-striped table-hover datatable-monitores">
+    <table class="table table-sm table-striped table-hover datatable-pessoas">
       <thead>
         <tr>
           <th scope="col">Nº USP</th>
@@ -15,10 +15,10 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($monitores as $key => $value)
+        @foreach($pessoas as $key => $value)
         <tr>
             <td>{{ $key }}</td>
-            <td><a href="/monitores/{{ $key }}">{{ $value }}</a></td>
+            <td><a href="/pessoas/{{ $key }}">{{ $value }}</a></td>
         </tr>
         @endforeach
       </tbody>
@@ -33,7 +33,7 @@
 <script>
     $(document).ready(function() {
         // DataTables
-        var table = $('.datatable-monitores').DataTable({
+        var table = $('.datatable-pessoas').DataTable({
             dom: '<t>'
             , ordering: true
             , order: ['1', 'asc'] /* ordenando por nome asc */

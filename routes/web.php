@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\PlaceController;
-use App\Http\Controllers\MonitorController;
+use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\OcorrenciaController;
 
 Route::get('/', [IndexController::class,'index']);
@@ -29,5 +29,5 @@ Route::get('ocorrencias/{ocorrencia}/edit', [OcorrenciaController::class, 'edit'
 Route::patch('ocorrencias/{ocorrencia}/', [OcorrenciaController::class, 'update']);
 Route::delete('ocorrencias/{ocorrencia}', [OcorrenciaController::class, 'destroy']);
 
-Route::get('monitores', [MonitorController::class,'index']);
-Route::get('monitores/{monitor}', [MonitorController::class,'show']);
+Route::get('pessoas', [PessoaController::class,'index']);
+Route::get('pessoas/{codpes}', [PessoaController::class,'show']);

@@ -6,8 +6,8 @@ $menu = [
         'url' => '/registros/create',
     ],
     [
-        'text' => '<i class="fa fa-user-tie"></i> Monitores',
-        'url'  => '/monitores',
+        'text' => '<i class="fa fa-user-tie"></i> Pessoas',
+        'url'  => '/pessoas',
         'can'  => 'admin'
     ],
     [
