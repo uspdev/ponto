@@ -47,7 +47,8 @@ class PessoaController extends Controller
         $in = Carbon::createFromFormat('d/m/Y',$request->in);
         $out = Carbon::createFromFormat('d/m/Y',$request->out);
 
-        $this->compute($codpes, $in, $out);
+        $computes = $this->compute($codpes, $in, $out);
+        dd($this->computeTotal($computes));
 
         $registros = Registro::where('created_at', '>=', $in)
             ->where('created_at', '<=', $out)
@@ -63,59 +64,59 @@ class PessoaController extends Controller
         ]);
      }
 
-     private function compute($codpes, $in, $out){
+    private function compute($codpes, $in, $out){
         $period = CarbonPeriod::between($in, $out);
         $computes = [];
         
         foreach ($period as $day) {
+
+            $dayName = $day->format('d') . ' - ' . $day->locale('pt_Br')->shortDayName;
 
             $registros = Registro::whereDate('created_at', $day->toDateString())
                 ->where('codpes', $codpes)
                 ->orderBy('created_at')
                 ->get();
 
-            // Dias sem registro de ponto
+            // Dia sem registro de ponto
             if($registros->isEmpty()) {
-                $arraykey = $day->format('d');
-                $arraykey .= ' - ' . $day->locale('pt_Br')->shortDayName;
-                $computes[$arraykey] = [
-                    'formatted' => '',
-                    'minutes'   => ''
-                ];
+                $computes[ $dayName ] = [];
+                continue;
             }
 
             foreach($registros->values() as $index=>$current){
+                
                 $next = $registros->get(++$index);
 
-                if($next){
+                if($current->type == 'in' && $next && $next->type == 'out'){
                     $entrada = Carbon::parse($current->created_at);
                     $saida = Carbon::parse($next->created_at);
 
-                    $arraykey = $day->format('d');
-                    $arraykey .= ' - ' . $day->locale('pt_Br')->shortDayName;
-                    $arraykey .= ' ' . $entrada->format('H:i') . '-' . $saida->format('H:i');
-
+                    $intervalo = $entrada->format('H:i') . '-' . $saida->format('H:i');
                     $minutes = $entrada->diffInMinutes($saida);
 
-                    $computes[$arraykey] = [
-                        'formatted' => CarbonInterval::minutes($minutes)->cascade()->locale('pt_Br')->forHumans(),
-                        'minutes'   => $entrada->diffInMinutes($saida)
-                    ];
-
-                } /* else {
-                    $entrada = Carbon::parse($current->created_at);
-                    $chave = $entrada->format('H:i');
-                    $x[$day->format('d')] = [
-                        $index => [
-                            $chave => 'sem saída'
-                        ]
-                    ]; 
-                } */
+                    $computes[ $dayName ][] = [$intervalo => $minutes];
+                } else {
+                    // entrada sem marcação de saída
+                    if($current->type == 'in'){
+                        $entrada = Carbon::parse($current->created_at);
+                        $computes[ $dayName ][] = [$entrada->format('H:i').'-?' => 0];
+                    }
+                }
             }
             
         }
-        dd($computes);
+        return $computes;
+    }
 
-     }
-
+    private function computeTotal($computes){
+        $minutes = 0;
+        foreach($computes as $day){
+            foreach($day as $entries){
+                foreach($entries as $entry){
+                    $minutes += $entry;
+                }
+            }
+        }
+        return CarbonInterval::minutes($minutes)->cascade()->locale('pt_Br')->forHumans();
+    }
 }
