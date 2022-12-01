@@ -62,7 +62,7 @@ class PessoaController extends Controller
             'emails' => $emails,
             'telefones' => $telefones,
             'registros' => $registros,
-            'omputes'   => $computes,
+            'computes'  => $computes,
             'total'     => Util::computeTotal($computes)
         ]);
      }

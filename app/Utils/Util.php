@@ -75,6 +75,6 @@ class Util
                 }
             }
         }
-        return CarbonInterval::minutes($minutes)->cascade()->locale('pt_Br')->forHumans();
+        return CarbonInterval::minutes($minutes)->cascade()->locale('pt_Br')->forHumans('H i');
     }
 }
