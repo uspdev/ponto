@@ -6,6 +6,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\OcorrenciaController;
 
 Route::get('/', [IndexController::class,'index']);
@@ -30,4 +31,7 @@ Route::patch('ocorrencias/{ocorrencia}/', [OcorrenciaController::class, 'update'
 Route::delete('ocorrencias/{ocorrencia}', [OcorrenciaController::class, 'destroy']);
 
 Route::get('pessoas', [PessoaController::class,'index']);
+
 Route::get('pessoas/{codpes}', [PessoaController::class,'show']);
+
+Route::resource('grupos', GrupoController::class);

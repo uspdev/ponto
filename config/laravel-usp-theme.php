@@ -7,8 +7,23 @@ $menu = [
     ],
     [
         'text' => '<i class="fa fa-user-tie"></i> Pessoas',
-        'url'  => '/pessoas',
-        'can'  => 'admin'
+        'can'  => 'admin',
+  
+        'submenu' => [
+            [
+                'text' => 'Pessoas',
+                'url'  => '/pessoas',
+                'can' => 'logado', 
+            ],
+            [
+                'type' => 'divider',
+            ],
+            [
+                'text' => 'Grupos',
+                'url'  => '/grupos',
+                'can' => 'logado', 
+            ],
+        ],
     ],
     [
         'text' => '<i class="fa fa-building"></i> Locais',
