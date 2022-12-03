@@ -14,7 +14,7 @@ use App\Models\Registro;
 use App\Models\Grupo;
 
 use App\Utils\Util;
-use Uspdev\Replicado\DB;
+
 
 class PessoaController extends Controller
 {
@@ -22,15 +22,8 @@ class PessoaController extends Controller
     {
         $this->authorize('admin');
 
-        $grupos = Grupo::all();
-
-        foreach($grupos as $grupo){
-            $pessoas = DB::fetchAll($grupo->query);
-            $grupo->pessoas = empty($pessoas) ? []: array_column($pessoas,'codpes');
-        }
-
         return view('pessoas.index',[
-            'grupos' => $grupos
+            'grupos' => Grupo::gruposWithPessoas()
         ]);
     }
 
