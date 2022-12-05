@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Utils\ReplicadoTemp;
 use Uspdev\Replicado\Pessoa;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
