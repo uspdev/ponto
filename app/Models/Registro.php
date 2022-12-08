@@ -9,6 +9,11 @@ use App\Models\Place;
 class Registro extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'status'
+    ];
+
     public function place(){
         return $this->belongsTo(Place::class);
     }

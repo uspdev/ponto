@@ -19,6 +19,7 @@ class CreateRegistrosTable extends Migration
             $table->string('codpes');
             $table->string('type'); // in or out
             $table->string('image');
+            $table->string('status')->default('valido');
 
             $table->unsignedBigInteger('place_id');
             $table->foreign('place_id')->references('id')->on('places');

@@ -19,6 +19,8 @@ Route::get('places/create', [PlaceController::class,'create']);
 Route::post('places', [PlaceController::class,'store']);
 Route::get('places', [PlaceController::class,'index']);
 
+Route::patch('registros/{registro}/invalidate', [RegistroController::class, 'invalidate']);
+
 Route::get('ocorrencias/create', [OcorrenciaController::class, 'create']);
 Route::get('ocorrencias', [OcorrenciaController::class, 'index']);
 Route::post('ocorrencias/', [OcorrenciaController::class, 'store']);

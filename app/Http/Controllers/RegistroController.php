@@ -88,4 +88,17 @@ class RegistroController extends Controller
         return Storage::download($path . $registro->image);
     }
 
+    public function invalidate(Registro $registro)
+    {
+        $this->authorize('admin');
+
+        $registro->fill([
+            'status' => 'invalido'
+        ]);
+        $registro->save();
+
+        return back();
+
+    }
+
  }
