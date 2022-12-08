@@ -2,29 +2,35 @@
 
 @section('content')
 
-<div class="card">
-  <div class="card-header font-weight-bold">
-    Pessoas
+@foreach($grupos as $grupo)
+
+  <div class="card">
+    <div class="card-header font-weight-bold">
+    {{ $grupo->name }}
+    </div>
+    <div class="card-body">
+      <table class="table table-sm table-striped table-hover datatable-pessoas">
+        <thead>
+          <tr>
+            <th scope="col">Nº USP</th>
+            <th scope="col">Nome</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($grupo->pessoas as $codpes)
+          <tr>
+              <td>{{ $codpes }}</td>
+              <td><a href="/pessoas/{{ $codpes }}">{{ \Uspdev\Replicado\Pessoa::obterNome($codpes) }} </a></td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="card-body">
-    <table class="table table-sm table-striped table-hover datatable-pessoas">
-      <thead>
-        <tr>
-          <th scope="col">Nº USP</th>
-          <th scope="col">Nome</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($pessoas as $key => $value)
-        <tr>
-            <td>{{ $key }}</td>
-            <td><a href="/pessoas/{{ $key }}">{{ $value }}</a></td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-</div>
+
+@endforeach
+
+
 
 @endsection
 

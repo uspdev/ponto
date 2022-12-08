@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Utils\ReplicadoTemp;
 use Illuminate\Validation\Rule;
 use App\Models\Place;
+use App\Models\Grupo;
 
 class RegistroRequest extends FormRequest
 {
@@ -26,9 +26,9 @@ class RegistroRequest extends FormRequest
      */
     public function rules()
     {
-        $monitores = ReplicadoTemp::listarMonitores(config('ponto.codslamon'));
+
         return [
-            'codpes'   => ['required','integer',Rule::in($monitores)],
+            'codpes'   => ['required','integer',Rule::in(Grupo::allowedCodpes())],
             'foto'     => 'required',
             'place_id' => ['required','integer',Rule::in(Place::pluck('id')->toArray())],
         ];
@@ -39,7 +39,7 @@ class RegistroRequest extends FormRequest
     {
         return [
             'codpes.required' => 'Número USP obrigatório',
-            'codpes.*' => 'Número USP não pertence a um(a) monitor(a)',
+            'codpes.*' => 'Número USP não permitido',
             'foto.required' => 'Foto Obrigatória',
         ];
     }

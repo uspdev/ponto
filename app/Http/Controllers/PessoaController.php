@@ -3,27 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Utils\ReplicadoTemp;
 use Uspdev\Replicado\Pessoa;
-use App\Models\Registro;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use App\Http\Requests\pessoaRequest;
 use Carbon\CarbonInterval;
 
+use App\Models\Registro;
+use App\Models\Grupo;
+
 use App\Utils\Util;
+
 
 class PessoaController extends Controller
 {
     public function index()
     {
         $this->authorize('admin');
-        $bolsistas = ReplicadoTemp::listarMonitores(config('ponto.codslamon'));
-        foreach ($bolsistas as $bolsista) {
-            $pessoas[$bolsista] = Pessoa::obterNome($bolsista);
-        }
+
         return view('pessoas.index',[
-            'pessoas' => $pessoas
+            'grupos' => Grupo::gruposWithPessoas()
         ]);
     }
 
