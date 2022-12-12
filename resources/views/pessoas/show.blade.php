@@ -40,6 +40,7 @@
               <br>
               Fim: <input name="out" value="{{ request()->out }}">
               <button type="submit" class="btn btn-success">Filtrar</button>   
+            </form>
           </div>
         </div>
 
