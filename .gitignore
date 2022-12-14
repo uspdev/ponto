@@ -21,3 +21,6 @@ public/vendor
 .lando.yml
 Dockerfile.custom
 php.ini
+database/migrations/2022_05_13_021534_create_registros_table.php
+database/migrations/2022_12_14_140445_create_registros_table.php
+database/migrations/2022_05_13_021534_create_registros_table.php
