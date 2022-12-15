@@ -31,7 +31,7 @@
         </div>
 
         <br>
-        
+
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Filtrar período:</h5>
@@ -39,7 +39,8 @@
               Início: <input name="in" value="{{ request()->in }}"><br>
               <br>
               Fim: <input name="out" value="{{ request()->out }}">
-              <button type="submit" class="btn btn-success">Filtrar</button>   
+              <button type="submit" class="btn btn-success">Filtrar</button>
+            </form>
           </div>
         </div>
 
@@ -65,16 +66,16 @@
                         @foreach($entries as $time=>$minutes)
                           {{ $time }}:
                           <b>
-                            @if($minutes > 0) 
+                            @if($minutes > 0)
                               {{ \Carbon\CarbonInterval::minutes($minutes)->cascade()->locale('pt_Br')->forHumans() }}
-                            @else 
+                            @else
                               Inválido
                             @endif
                           </b>
                           <br>
                         @endforeach
-                      @empty 
-                      sem registro 
+                      @empty
+                      sem registro
                       @endforelse
                     </td>
                   </tr>
@@ -85,21 +86,14 @@
         </div>
 
       </div>
-      <div class="col-lg-7 p-3">          
+      <div class="col-lg-7 p-3">
         <div class="card">
         <div class="card-body">
           <h5 class="card-title">Registros</h5>
           <ul class="list-group list-group-flush">
-            @foreach ($registros as $registro)
               <li class="list-group-item">
-                @if($registro->type == 'in')
-                  <i class="fas fa-sign-in-alt text-success"></i> <a href="/registros/{{ $registro->id }}">{{ $registro->created_at->format('d/m/Y - H:i') }} (Entrada)</a>
-                @endif
-                @if($registro->type == 'out')
-                    <i class="fas fa-sign-out-alt text-danger"></i> <a href="/registros/{{ $registro->id }}">{{ $registro->created_at->format('d/m/Y - H:i') }} (Saída)</a>
-                @endif
+                @include('pessoas.partials.form')
               </li>
-            @endforeach
             </ul>
           </div>
         </div>
