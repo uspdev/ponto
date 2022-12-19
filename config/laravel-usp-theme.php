@@ -6,6 +6,11 @@ $menu = [
         'url' => '/registros/create',
     ],
     [
+        'text' => 'Meu ponto',
+        'can' => 'logado',
+        'url'  => '/meuponto',
+    ],
+    [
         'text' => '<i class="fa fa-user-tie"></i> Pessoas',
         'can'  => 'admin',
   
