@@ -38,5 +38,3 @@ Route::get('pessoas', [PessoaController::class,'index']);
 Route::get('pessoas/{codpes}', [PessoaController::class,'show']);
 
 Route::resource('grupos', GrupoController::class);
-
-Route::get('meuponto/{codpes}', [PontoController::class,'show']);
