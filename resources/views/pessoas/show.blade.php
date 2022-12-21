@@ -75,7 +75,7 @@
                           <br>
                         @endforeach
                       @empty
-                      sem registro
+                      sem registro ou registro inválido
                       @endforelse
                     </td>
                   </tr>

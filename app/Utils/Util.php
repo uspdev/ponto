@@ -32,6 +32,7 @@ class Util
 
             $registros = Registro::whereDate('created_at', $day->toDateString())
                 ->where('codpes', $codpes)
+                ->where('status', '!=', 'invalido')
                 ->orderBy('created_at')
                 ->get();
 

@@ -8,12 +8,12 @@ $menu = [
     [
         'text' => '<i class="fa fa-user-tie"></i> Pessoas',
         'can'  => 'admin',
-  
+
         'submenu' => [
             [
                 'text' => 'Pessoas',
                 'url'  => '/pessoas',
-                'can' => 'logado', 
+                'can' => 'logado',
             ],
             [
                 'type' => 'divider',
@@ -21,7 +21,7 @@ $menu = [
             [
                 'text' => 'Grupos',
                 'url'  => '/grupos',
-                'can' => 'logado', 
+                'can' => 'logado',
             ],
         ],
     ],
@@ -32,13 +32,13 @@ $menu = [
     ],
     [
         'text' => 'Ocorrências',
-        'can' => 'logado', 
-    
+        'can' => 'logado',
+
             'submenu' => [
                 [
                     'text' => 'Registrar ocorrência',
                     'url'  => '/ocorrencias/create',
-                    'can' => 'logado', 
+                    'can' => 'logado',
                 ],
                 [
                     'type' => 'divider',
@@ -46,7 +46,7 @@ $menu = [
                 [
                     'text' => 'Registradas',
                     'url'  => '/ocorrencias',
-                    'can' => 'logado', 
+                    'can' => 'logado',
                 ],
                 [
                     'type' => 'divider',
@@ -54,11 +54,11 @@ $menu = [
                 [
                     'text' => 'Resolvidas',
                     'url'  => '/ocorrencias/solved',
-                    'can' => 'logado', 
+                    'can' => 'logado',
                 ],
             ],
     ],
-        
+
 ];
 
 $right_menu = [

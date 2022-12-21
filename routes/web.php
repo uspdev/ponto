@@ -8,6 +8,7 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\OcorrenciaController;
+use App\Http\Controllers\PontoController;
 
 Route::get('/', [IndexController::class,'index']);
 
