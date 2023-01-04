@@ -13,14 +13,6 @@ use Carbon\CarbonInterval;
 
 class Util
 {    
-    /* esta função não está sendo usada...
-    public static function presentes(Place $place){
-        $registros = Registro::where('created_at', '>=', Carbon::today())
-            ->where('place_id',$place->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
-    */
 
     public function compute($codpes, $in, $out){
         $period = CarbonPeriod::between($in, $out);
