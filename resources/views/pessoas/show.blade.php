@@ -48,7 +48,12 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Filtrar período:</h5>
+            <h5 class="card-title">Frequência</h5>
+            <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">Gerar folha de frequência
+              <i class="fas fa-solid fa-file-pdf"></i><br />
+            </a>
+            
+            <br>
             <b>Total no período: </b>{{ $total }} <br>
             <table class="table">
               <thead>

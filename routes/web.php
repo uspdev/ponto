@@ -8,7 +8,7 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\OcorrenciaController;
-use App\Http\Controllers\PontoController;
+use App\Http\Controllers\PdfController;
 
 Route::get('/', [IndexController::class,'index']);
 
@@ -38,3 +38,5 @@ Route::get('pessoas', [PessoaController::class,'index']);
 Route::get('pessoas/{codpes}', [PessoaController::class,'show']);
 
 Route::resource('grupos', GrupoController::class);
+
+Route::get('folha/{codpes}', [PdfController::class,'folha']);

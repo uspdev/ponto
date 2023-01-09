@@ -20,7 +20,7 @@ class Util
         
         foreach ($period as $day) {
 
-            $dayName = $day->format('d') . ' - ' . $day->locale('pt_Br')->shortDayName;
+            $dayName = $day->format('d') . ' - ' . ucfirst($day->locale('pt_Br')->shortDayName);
 
             $registros = Registro::whereDate('created_at', $day->toDateString())
                 ->where('codpes', $codpes)

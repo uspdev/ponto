@@ -65,7 +65,6 @@ class RegistroController extends Controller
 
         $registro->save();
 
-        //Usuario::create($validated);
         return redirect('/');
     }
 

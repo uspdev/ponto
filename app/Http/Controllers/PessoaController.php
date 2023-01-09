@@ -50,6 +50,12 @@ class PessoaController extends Controller
 
         $computes = Util::compute($codpes, $in, $out);
         
+        if(count($computes) > 31) {
+            $request->session()->flash('alert-danger',$request->in . ' e ' . $request->out . 
+            ' inválidos. Selecione intervalo com até 31 dias.');
+            return redirect('/pessoas/' . $codpes);
+        }
+        
         $registros = Registro::where('created_at', '>=', $in)
             ->where('created_at', '<=', $out)
             ->where('codpes', '=', $pessoa['codpes'])
