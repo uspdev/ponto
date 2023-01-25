@@ -22,10 +22,10 @@
           <div class="card-body">
             <h5 class="card-title">Contato</h5>
             @foreach ($emails as $email)
-            <i class="fas fa-envelope"></i> {{ $email }}<br />
+              <i class="fas fa-envelope"></i> {{ $email }}<br />
             @endforeach
             @foreach ($telefones as $telefone)
-            <i class="fas fa-phone"></i> {{ $telefone }}<br />
+              <i class="fas fa-phone"></i> {{ $telefone }}<br />
             @endforeach
           </div>
         </div>
@@ -38,7 +38,7 @@
             <form method="GET">
               Início: <input name="in" value="{{ request()->in }}"><br>
               <br>
-              Fim: <input name="out" value="{{ request()->out }}">
+              Fim: <input name="out" value="{{ request()->out }}"><br><br>
               <button type="submit" class="btn btn-success">Filtrar</button>
             </form>
           </div>
@@ -49,7 +49,8 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Frequência</h5>
-            <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">Gerar folha de frequência
+            <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
+              Gerar folha de frequência
               <i class="fas fa-solid fa-file-pdf"></i><br />
             </a>
             

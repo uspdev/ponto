@@ -51,8 +51,10 @@ class PessoaController extends Controller
         $computes = Util::compute($codpes, $in, $out);
         
         if(count($computes) > 31) {
-            $request->session()->flash('alert-danger',$request->in . ' e ' . $request->out . 
-            ' inválidos. Selecione intervalo com até 31 dias.');
+            $request->session()->flash('alert-danger',
+            'O intervalo de ' 
+            . $request->in . ' até ' . $request->out 
+            . ' é inválido. Selecione intervalo com no máximo 31 dias.');
             return redirect('/pessoas/' . $codpes);
         }
         
@@ -61,7 +63,6 @@ class PessoaController extends Controller
             ->where('codpes', '=', $pessoa['codpes'])
             ->get();
 
-        
         return view('pessoas.show',[
             'pessoa' => $pessoa,
             'emails' => $emails,

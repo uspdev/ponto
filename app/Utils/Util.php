@@ -31,6 +31,7 @@ class Util
             // Dia sem registro de ponto
             if($registros->isEmpty()) {
                 $computes[ $dayName ] = [];
+                //array_push($computes, [$dayName => []]);
                 continue;
             }
 
@@ -46,16 +47,20 @@ class Util
                     $minutes = $entrada->diffInMinutes($saida);
 
                     $computes[ $dayName ][] = [$intervalo => $minutes];
+                    //array_push($computes, [$dayName => [$intervalo => $minutes]]);
+
                 } else {
                     // entrada sem marcação de saída
                     if($current->type == 'in'){
                         $entrada = Carbon::parse($current->created_at);
                         $computes[ $dayName ][] = [$entrada->format('H:i').'-?' => 0];
+                        //array_push($computes, [$dayName => [$entrada->format('H:i').'-?' => 0]]);
                     }
                 }
             }
             
         }
+
         return $computes;
     }
 
@@ -68,6 +73,39 @@ class Util
                 }
             }
         }
-        return CarbonInterval::minutes($minutes)->cascade()->locale('pt_Br')->forHumans('H i');
+        return self::formatMinutes($minutes);
+    }
+
+    public function formatMinutes($minutes){
+        $h = floor($minutes / 60);
+        $m = $minutes -   floor($minutes / 60) * 60;
+        if($h == 1 and $m == 1) return "{$h} hora e ${m} minuto";
+        if($h == 1 and $m > 1) return "{$h} hora e ${m} minutos";
+        if($h > 1 and $m == 1) return "{$h} horas e ${m} minuto";
+        if($h > 1 and $m > 1) return "{$h} horas e ${m} minutos";
+        if($h > 1 and $m == 0) return "{$h} horas";
+        if($h == 1 and $m == 0) return "{$h} hora";
+        if($h == 0 and $m == 1) return "{$m} minuto";
+        if($h == 0 and $m > 1) return "{$m} minutos";
+        if($h == 0 and $m == 0) return '';
+        return "{$h} horas e ${m} minutos";
+    }
+
+    public function computeDayMinutes($computes, $day) {
+        $minutos_do_dia = 0;
+        $registros = '';
+
+        if(array_key_exists($day, $computes)){
+            $array = $computes[$day];
+            foreach($array as $linhas){
+                foreach($linhas as $registro=>$minutos){
+                    if(empty($registros)) $registros = $registro;
+                    else { $registros .= " e $registro";}
+                    $minutos_do_dia += $minutos;
+                }
+            }
+        }
+        
+        return [$day,$registros, self::formatMinutes($minutos_do_dia)];
     }
 }

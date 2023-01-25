@@ -31,10 +31,23 @@ class PdfController extends Controller
             return redirect('/pessoas/' . $codpes);
         }
 
+        // dividindo computes em duas partes para o pdf
+        if(count($computes) < 17) {
+            $parte1 = $computes;
+            $parte2 = [];  
+        } else {
+            $parte1 = array_slice($computes, 0, 17);
+            $parte2 = array_slice($computes, 17, count($computes));
+        }
+
         $pdf = PDF::loadView('pdfs.folha', [
+            'parte1'   => $parte1,
+            'parte2'   => $parte2,
             'computes' => $computes,
+            'dias'     => array_keys($computes),
             'in'       => $request->in,
             'out'      => $request->out,
+            'total'    => Util::computeTotal($computes)
         ]);
 
         return $pdf->download("$codpes.pdf");
