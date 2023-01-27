@@ -26,10 +26,16 @@ class PessoaController extends Controller
         ]);
     }
 
-    public function show(Request $request, $codpes)
+    public function show(Request $request, $codpes = 'my')
     {   
-        $this->authorize('admin');
-        $pessoa['codpes'] = $codpes;
+        if($codpes != 'my') {
+            $this->authorize('admin');
+            $pessoa['codpes'] = $codpes;
+        } else {
+            $this->authorize('logado');
+            $pessoa['codpes'] = auth()->user()->codpes;
+        }
+
         $pessoa['nompes'] = Pessoa::obterNome($pessoa['codpes']);
 
         $emails = Pessoa::emails($pessoa['codpes']);
@@ -48,7 +54,7 @@ class PessoaController extends Controller
         $in = Carbon::createFromFormat('d/m/Y',$request->in);
         $out = Carbon::createFromFormat('d/m/Y',$request->out);
 
-        $computes = Util::compute($codpes, $in, $out);
+        $computes = Util::compute($pessoa['codpes'], $in, $out);
         
         if(count($computes) > 31) {
             $request->session()->flash('alert-danger',

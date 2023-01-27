@@ -26,8 +26,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('logado', function ($user) {
-            return true;
-            
+            return true; 
+        });
+
+        Gate::define('owner', function ($user, $codpes) {
+            if(Gate::allows('admin')) return True;
+            return $user->codpes == $codpes;
         });
     }
 }

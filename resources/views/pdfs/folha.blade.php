@@ -40,8 +40,8 @@
             <td class="dados" style='width:70%'><span style='font-size: 8px'>Nome</span></td>
         </tr>
         <tr>
-            <td class="dados">123465</td>
-            <td class="dados">Maria da Silva</td>
+            <td class="dados">{{ $codpes }}</td>
+            <td class="dados">{{ $nome }}</td>
 
         </tr>
         <tr>
@@ -49,8 +49,8 @@
             <td  class="dados"style='width:70%'><span style='font-size: 8px'>Supervisor Interno</span></td>
         </tr>
         <tr>
-            <td class="dados">165465</td>
-            <td class="dados">José Pedro</td>
+            <td class="dados">{{ $codpes_supervisor }}</td>
+            <td class="dados">{{ $nome_supervisor }}</td>
         </tr>
     </table>
 
@@ -80,11 +80,11 @@
             @endif
 
             <tr>
-                <td>{{ $col1[0] }}</td>
+                <td><b>{{ $col1[0] }}</b></td>
                 <td>{{{ $col1[1] }}}</td>
                 <td>{{ $col1[2] }}</td>
 
-                <td>{{ $col2[0] }}</td>
+                <td><b>{{ $col2[0] }}</b></td>
                 <td>{{{ $col2[1] }}}</td>
                 <td>{{ $col2[2] }}</td>
             </tr>
@@ -94,5 +94,22 @@
     Declaro, para fins de remuneração da bolsa de complementação de estágio, 
     que o estagiário acima identificado cumpriu <u>{{ $total }}</u> de estágio entre <i>{{$in}} e {{$out}}</i>.
 
+    <br><br><br>
+    <table style='width:100%'>
+        <tr>
+            <td class="dados" style='width:35%'><span style='font-size: 8px'>Assinatura do Estagiário</span></td>
+            <td class="dados" style='width:10%'><span style='font-size: 8px'>Data</span></td>
+            <td class="dados" style='width:40%'><span style='font-size: 8px'>Assinatura do Supervisor Interno</span></td>
+            <td class="dados" style='width:10%'><span style='font-size: 8px'>Data</span></td>
+        </tr>
+
+        <tr>
+            <td class="dados" style='width:35%; height:60px'></span>_______________________________</td>
+            <td class="" style='width:10%'></span>____/____/____</td>
+            <td class="" style='width:40%'></span>_______________________________</td>
+            <td class="dados" style='width:10%'></span>____/____/____</td>
+        </tr>
+
+    </table>
 </body>
 </html>

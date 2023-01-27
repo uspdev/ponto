@@ -10,6 +10,18 @@ class Registro extends Model
 {
     use HasFactory;
 
+    public static $status = ['válido','inválido','análise'];
+
+    public static $motivos = [
+        'Esquecimento',
+        'Férias',
+        'Consulta Médica',
+        'Licença Médica',
+        'Doação de Sangue',
+        'Falha no Sistema de Ponto',
+        'Ponte/Recesso/Feriado',
+    ];
+
     protected $fillable = [
         'codpes',
         'type',

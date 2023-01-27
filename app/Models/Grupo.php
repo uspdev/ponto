@@ -35,6 +35,18 @@ class Grupo extends Model
             }
             
         }
-        return  $codpes;
+        return $codpes;
+    }
+
+    public static function getGroup($codpes){
+        $grupos = Grupo::all();
+
+        foreach($grupos as $grupo){
+            $pessoas = DB::fetchAll($grupo->query);
+            foreach($pessoas as $pessoa){
+                if($codpes == $pessoa['codpes']) return $grupo;
+            }
+        }
+        return null;
     }
 }

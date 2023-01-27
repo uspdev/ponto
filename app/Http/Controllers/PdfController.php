@@ -10,10 +10,12 @@ use Carbon\CarbonPeriod;
 use App\Http\Requests\pessoaRequest;
 use Carbon\CarbonInterval;
 use PDF;
+use App\Models\Grupo;
 
 class PdfController extends Controller
 {
     public function folha(Request $request, $codpes){
+        $this->authorize('owner',$codpes);
 
         $request->validate([
             'in' => 'required|date_format:d/m/Y',
@@ -31,23 +33,27 @@ class PdfController extends Controller
             return redirect('/pessoas/' . $codpes);
         }
 
-        // dividindo computes em duas partes para o pdf
-        if(count($computes) < 17) {
-            $parte1 = $computes;
-            $parte2 = [];  
+        $nome = Pessoa::nomeCompleto($codpes);
+        // supervisor
+        $grupo = Grupo::getGroup($codpes);
+        if($grupo) {
+            $codpes_supervisor = $grupo->codpes_supervisor;
+            $nome_supervisor = Pessoa::nomeCompleto($codpes_supervisor);
         } else {
-            $parte1 = array_slice($computes, 0, 17);
-            $parte2 = array_slice($computes, 17, count($computes));
+            $request->session()->flash('alert-danger',"{$nome} não pertence a nenhum setor.");
+            return redirect('/pessoas/' . $codpes);
         }
 
         $pdf = PDF::loadView('pdfs.folha', [
-            'parte1'   => $parte1,
-            'parte2'   => $parte2,
             'computes' => $computes,
             'dias'     => array_keys($computes),
             'in'       => $request->in,
             'out'      => $request->out,
-            'total'    => Util::computeTotal($computes)
+            'total'    => Util::computeTotal($computes),
+            'codpes'             => $codpes,
+            'codpes_supervisor'  =>  $codpes_supervisor,
+            'nome'               =>  $nome,
+            'nome_supervisor'    =>  $nome_supervisor,
         ]);
 
         return $pdf->download("$codpes.pdf");

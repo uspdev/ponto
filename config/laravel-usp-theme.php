@@ -6,6 +6,16 @@ $menu = [
         'url' => '/registros/create',
     ],
     [
+        'text' => '<i class="fa fa-user-clock"></i> Meu Ponto',
+        'url' => '/pessoas/my',
+        'can' => 'logado',
+    ],
+    [
+        'text' => '<i class="fa fa-user-clock"></i> Justificar Ponto',
+        'url' => '/justificar',
+        'can' => 'logado',
+    ],
+    [
         'text' => '<i class="fa fa-user-tie"></i> Pessoas',
         'can'  => 'admin',
 
@@ -13,7 +23,7 @@ $menu = [
             [
                 'text' => 'Pessoas',
                 'url'  => '/pessoas',
-                'can' => 'logado',
+                'can' => 'admin',
             ],
             [
                 'type' => 'divider',
@@ -21,7 +31,7 @@ $menu = [
             [
                 'text' => 'Grupos',
                 'url'  => '/grupos',
-                'can' => 'logado',
+                'can' => 'admin',
             ],
         ],
     ],

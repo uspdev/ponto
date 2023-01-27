@@ -40,3 +40,6 @@ Route::get('pessoas/{codpes}', [PessoaController::class,'show']);
 Route::resource('grupos', GrupoController::class);
 
 Route::get('folha/{codpes}', [PdfController::class,'folha']);
+
+Route::get('justificar', [RegistroController::class,'justificar']);
+Route::post('justificar', [RegistroController::class,'justificar_store']);
