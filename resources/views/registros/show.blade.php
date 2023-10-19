@@ -38,6 +38,10 @@
         @if ($registro->codpes_analise)
             <div> <b>Análisado por:</b> {{ $registro->codpes_analise }} </div>
         @endif
+
+        @if ($registro->status == 'análise')
+            @include('registros.partials.analisar')
+        @endif
     </div>
 </div>
 @endsection
