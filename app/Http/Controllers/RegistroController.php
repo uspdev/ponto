@@ -100,6 +100,19 @@ class RegistroController extends Controller
         return back();
     }
 
+    public function update(RegistroRequest $request, Registro $registro)
+    {
+        $this->authorize('admin');
+
+        $registro->fill([
+            'status' => 'válido',
+            'analise' => $request->analise
+        ]);
+        $registro->save();
+
+        return redirect("/pessoas/{$registro->codpes}");
+    }
+
     public function justificar()
     {
         $this->authorize('logado');
@@ -140,7 +153,7 @@ class RegistroController extends Controller
             $orig = $request->file('file')->getClientOriginalName();
             $orig_array = explode('.',$orig);
             $extensao = array_pop($orig_array);
-   
+
             $now = new DateTime();
             $image_name = $registro->codpes . '_' . $now->getTimestamp(). ".{$extensao}";
 
