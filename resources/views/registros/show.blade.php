@@ -36,12 +36,14 @@
         @endif
 
         @if ($registro->codpes_analise)
-            <div> <b>Análisado por:</b> {{ $registro->codpes_analise }} </div>
+            <div> <b>Análisado por:</b> {{ Uspdev\Replicado\Pessoa::obterNome($registro->codpes_analise) }} </div>
         @endif
 
         @if ($registro->status == 'análise')
             @include('registros.partials.analisar')
         @endif
+        <br />
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">Voltar</a>
     </div>
 </div>
 @endsection

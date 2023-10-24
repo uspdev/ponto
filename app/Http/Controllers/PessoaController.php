@@ -27,7 +27,7 @@ class PessoaController extends Controller
     }
 
     public function show(Request $request, $codpes = 'my')
-    {   
+    {
         if($codpes != 'my') {
             $this->authorize('admin');
             $pessoa['codpes'] = $codpes;
@@ -40,30 +40,38 @@ class PessoaController extends Controller
 
         $emails = Pessoa::emails($pessoa['codpes']);
         $telefones = Pessoa::telefones($pessoa['codpes']);
-        
+
         if(!empty($request->in) and !empty($request->out)){
             $request->validate([
                 'in' => 'required|date_format:d/m/Y',
                 'out' => 'required|date_format:d/m/Y'
             ]);
         } else {
-            $request->in = "21/" . date("m/Y",strtotime("-1 month"));
-            $request->out = "20/" . date("m/Y");
+            // TODO: Precisa testar melhor
+            if (date("d") >= 20) {
+                $mesI = date("m");
+                $mesF = date("m", strtotime("+1 month"));
+            } else {
+                $mesI = date("m/Y",strtotime("-1 month"));
+                $mesF = date("m", strtotime("+1 month"));
+            }
+            $request->in = "21/" . $mesI . date("/Y",strtotime("-1 month"));
+            $request->out = "20/" . $mesF . date("/Y");
         }
 
         $in = Carbon::createFromFormat('d/m/Y',$request->in);
         $out = Carbon::createFromFormat('d/m/Y',$request->out);
 
         $computes = Util::compute($pessoa['codpes'], $in, $out);
-        
+
         if(count($computes) > 31) {
             $request->session()->flash('alert-danger',
-            'O intervalo de ' 
-            . $request->in . ' até ' . $request->out 
+            'O intervalo de '
+            . $request->in . ' até ' . $request->out
             . ' é inválido. Selecione intervalo com no máximo 31 dias.');
             return redirect('/pessoas/' . $codpes);
         }
-        
+
         $registros = Registro::where('created_at', '>=', $in)
             ->where('created_at', '<=', $out)
             ->where('codpes', '=', $pessoa['codpes'])

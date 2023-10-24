@@ -100,14 +100,14 @@ class RegistroController extends Controller
         return back();
     }
 
-    public function update(RegistroRequest $request, Registro $registro)
+    public function update(Request $request, Registro $registro)
     {
         $this->authorize('admin');
 
-        $registro->fill([
-            'status' => 'válido',
-            'analise' => $request->analise
-        ]);
+        $registro->status = $request->status;
+        $registro->analise = $request->analise;
+        $registro->codpes_analise = auth()->user()->codpes;
+
         $registro->save();
 
         return redirect("/pessoas/{$registro->codpes}");
