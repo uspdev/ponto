@@ -17,6 +17,8 @@ Route::post('registros', [RegistroController::class,'store']);
 Route::get('registros/{registro}', [RegistroController::class,'show']);
 Route::get('registros/{registro}/picture', [RegistroController::class, 'picture']);
 
+Route::patch('registros/{registro}/', [RegistroController::class, 'update']);
+
 Route::get('places/create', [PlaceController::class,'create']);
 Route::post('places', [PlaceController::class,'store']);
 Route::get('places', [PlaceController::class,'index']);

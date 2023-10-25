@@ -12,12 +12,14 @@
 
   @can('admin')
     @if($registro->status == 'válido')
-      <form method="POST" action="registros/{{ $registro->id }}/invalidate">
+      <form style="display: inline;" method="POST" action="registros/{{ $registro->id }}/invalidate">
         @csrf
         @method('PATCH')
-        <button type="submit" class="btn btn-danger">Invalidar registro</button> <br> 
+        <button type="submit" class="btn btn-danger btn-sm mb-1" title="Invalidar registro"><i class="fa fa-thumbs-down"></i> Invalidar</button>
       </form>
+    @else
+      {{ $registro->analise }}
     @endif
   @endcan
-      
+
 @endforeach

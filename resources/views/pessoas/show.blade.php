@@ -53,7 +53,7 @@
               Gerar folha de frequência
               <i class="fas fa-solid fa-file-pdf"></i><br />
             </a>
-            
+
             <br>
             <b>Total no período: </b>{{ $total }} <br>
             <table class="table">
