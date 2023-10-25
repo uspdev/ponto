@@ -110,7 +110,7 @@ class RegistroController extends Controller
 
         $registro->save();
 
-        return redirect("/pessoas/{$registro->codpes}");
+        return redirect("/pessoas/{$registro->codpes}?in={$request->in}&out={$request->out}");
     }
 
     public function justificar()

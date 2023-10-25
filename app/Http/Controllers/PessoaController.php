@@ -47,7 +47,7 @@ class PessoaController extends Controller
                 'out' => 'required|date_format:d/m/Y'
             ]);
         } else {
-            // TODO: Precisa testar melhor
+            // // TODO: Precisa testar melhor
             if (date("d") >= 20) {
                 $mesI = date("m");
                 $mesF = date("m", strtotime("+1 month"));
@@ -59,8 +59,8 @@ class PessoaController extends Controller
             $request->out = "20/" . $mesF . date("/Y");
         }
 
-        $in = Carbon::createFromFormat('d/m/Y',$request->in);
-        $out = Carbon::createFromFormat('d/m/Y',$request->out);
+        $in = Carbon::createFromFormat('d/m/Y H:i:s', $request->in . ' 00:00:00');
+        $out = Carbon::createFromFormat('d/m/Y H:i:s', $request->out . ' 23:59:59');
 
         $computes = Util::compute($pessoa['codpes'], $in, $out);
 
