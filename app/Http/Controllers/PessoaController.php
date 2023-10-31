@@ -47,16 +47,8 @@ class PessoaController extends Controller
                 'out' => 'required|date_format:d/m/Y'
             ]);
         } else {
-            // // TODO: Precisa testar melhor
-            if (date("d") >= 20) {
-                $mesI = date("m");
-                $mesF = date("m", strtotime("+1 month"));
-            } else {
-                $mesI = date("m/Y",strtotime("-1 month"));
-                $mesF = date("m", strtotime("+1 month"));
-            }
-            $request->in = "21/" . $mesI . date("/Y",strtotime("-1 month"));
-            $request->out = "20/" . $mesF . date("/Y");
+	        $request->in = "21/" . date("m/Y",strtotime("-1 month"));
+            $request->out = "20/" . date("m/Y");
         }
 
         $in = Carbon::createFromFormat('d/m/Y H:i:s', $request->in . ' 00:00:00');
