@@ -47,7 +47,10 @@ class PessoaController extends Controller
                 'out' => 'required|date_format:d/m/Y'
             ]);
         } else {
-	        $request->in = "21/" . date("m/Y",strtotime("-1 month"));
+	        // Se o dia corrente é dia 31, não estava subtraindo 1 mês em $request->in
+            // https://stackoverflow.com/questions/9058523/php-date-and-strtotime-return-wrong-months-on-31st Answer #31
+            $base = strtotime(date('Y-m',time()) . '-01 00:00:01');
+            $request->in = '21/' . date('m/Y', strtotime('-1 month', $base));
             $request->out = "20/" . date("m/Y");
         }
 
