@@ -72,7 +72,7 @@ class RegistroController extends Controller
 
     public function show(Registro $registro)
     {
-        $this->authorize('owner',$registro->codpes);
+        $this->authorize('boss',$registro->codpes);
 
         return view('registros.show', [
             'registro' => $registro
@@ -81,7 +81,7 @@ class RegistroController extends Controller
 
     public function picture()
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
         $registroId = explode('/', url()->current())[4];
         $registro = Registro::find($registroId);
         $path = (config('ponto.pathPictures') == 'pictures') ? '/pictures/' : '/';
@@ -90,7 +90,7 @@ class RegistroController extends Controller
 
     public function invalidate(Registro $registro)
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
 
         $registro->fill([
             'status' => 'inválido'
@@ -102,7 +102,7 @@ class RegistroController extends Controller
 
     public function update(Request $request, Registro $registro)
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
 
         $registro->status = $request->status;
         $registro->analise = $request->analise;

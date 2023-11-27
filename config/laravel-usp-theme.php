@@ -17,13 +17,13 @@ $menu = [
     ],
     [
         'text' => '<i class="fa fa-user-tie"></i> Pessoas',
-        'can'  => 'admin',
+        'can'  => 'boss',
 
         'submenu' => [
             [
                 'text' => 'Pessoas',
                 'url'  => '/pessoas',
-                'can' => 'admin',
+                'can' => 'boss',
             ],
             [
                 'type' => 'divider',

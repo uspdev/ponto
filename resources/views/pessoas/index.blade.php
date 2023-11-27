@@ -2,35 +2,43 @@
 
 @section('content')
 
-@foreach($grupos as $grupo)
+{{-- Utilizando o gate boss para supervisor e autorizador --}}
+@can('boss')
 
-  <div class="card">
-    <div class="card-header font-weight-bold">
-    {{ $grupo->name }}
+  @foreach($grupos as $grupo)
+
+    {{-- Se o usuário logado é supervisor, autorizador ou admin, lista o grupo --}}
+    @if (App\Models\Grupo::find($grupo->id)->codpes_supervisor == Auth::user()->codpes || App\Models\Grupo::find($grupo->id)->codpes_autorizador == Auth::user()->codpes || Gate::allows('admin')) 
+
+    <div class="card">
+      <div class="card-header font-weight-bold">
+      {{ $grupo->name }}
+      </div>
+      <div class="card-body">
+        <table class="table table-sm table-striped table-hover datatable-pessoas">
+          <thead>
+            <tr>
+              <th scope="col">Nº USP</th>
+              <th scope="col">Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($grupo->pessoas as $codpes)
+            <tr>
+                <td>{{ $codpes }}</td>
+                <td><a href="/pessoas/{{ $codpes }}">{{ \Uspdev\Replicado\Pessoa::obterNome($codpes) }} </a></td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="card-body">
-      <table class="table table-sm table-striped table-hover datatable-pessoas">
-        <thead>
-          <tr>
-            <th scope="col">Nº USP</th>
-            <th scope="col">Nome</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($grupo->pessoas as $codpes)
-          <tr>
-              <td>{{ $codpes }}</td>
-              <td><a href="/pessoas/{{ $codpes }}">{{ \Uspdev\Replicado\Pessoa::obterNome($codpes) }} </a></td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-@endforeach
+    @endif
 
+  @endforeach
 
+@endcan
 
 @endsection
 

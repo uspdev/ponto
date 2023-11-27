@@ -1,9 +1,11 @@
 # Ponto
 
 Registro de ponto de monitores das salas Pró-Aluno.
+
 ## Funcionalidades
 
 * Registro de ponto com foto.
+* Supervisor e autorizador podem acompanhar o ponto das pessoas nos seus grupos. Para isso, após o supervisor ou autorizador logar no sistema, através da rota /senhaunica-users pode-se adicionar essa pessoa à permissão hireárquica **boss**.
 
 ## Em produção
 
@@ -64,3 +66,4 @@ Estagiários da STI FFLCH:
 - 14/06/2022 - Protegendo os arquivos de imagem
 - 14/06/2022 - Exibindo informações e foto do registro
 - 31/05/2022 - Código da sala de monitoria parametrizado
+- 27/11/2023 - Supervisor e autorizador podem ver o ponto das pessosas nos seus grupos
