@@ -19,7 +19,7 @@ class PessoaController extends Controller
 {
     public function index()
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
 
         return view('pessoas.index',[
             'grupos' => Grupo::gruposWithPessoas()
@@ -29,7 +29,7 @@ class PessoaController extends Controller
     public function show(Request $request, $codpes = 'my')
     {
         if($codpes != 'my') {
-            $this->authorize('admin');
+            $this->authorize('boss');
             $pessoa['codpes'] = $codpes;
         } else {
             $this->authorize('logado');
