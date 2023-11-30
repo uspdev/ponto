@@ -14,7 +14,7 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
 
         $grupos = Grupo::all();
 
@@ -60,7 +60,7 @@ class GrupoController extends Controller
      */
     public function show(Grupo $grupo)
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
         //
     }
 
@@ -72,7 +72,7 @@ class GrupoController extends Controller
      */
     public function edit(Grupo $grupo)
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
         return view('grupos.edit', [
                 'grupo' => $grupo,
             ]);
@@ -87,7 +87,7 @@ class GrupoController extends Controller
      */
     public function update(GrupoRequest $request, Grupo $grupo)
     {
-        $this->authorize('admin');
+        $this->authorize('boss');
         $validated = $request->validated();
         $grupo->update($validated);
         request()->session()->flash('alert-info','Grupo atualizado com sucesso');
