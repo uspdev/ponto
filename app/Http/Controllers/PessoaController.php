@@ -41,18 +41,24 @@ class PessoaController extends Controller
         $emails = Pessoa::emails($pessoa['codpes']);
         $telefones = Pessoa::telefones($pessoa['codpes']);
 
+        // Verificar o início e fim da folha no Grupo que a pessoa pertence
+        $inicio_folha = (Grupo::getGroup($pessoa['codpes'])) ? Grupo::getGroup($pessoa['codpes'])->inicio_folha : 21;
+        $fim_folha = (Grupo::getGroup($pessoa['codpes'])) ? Grupo::getGroup($pessoa['codpes'])->fim_folha : 20;
+        // Formato dia com dois dígitos
+        $inicio_folha = (strlen($inicio_folha) < 2) ? '0' . $inicio_folha : $inicio_folha;
+        $fim_folha = (strlen($fim_folha) < 2) ? '0' . $fim_folha : $fim_folha;
+
         if(!empty($request->in) and !empty($request->out)){
             $request->validate([
                 'in' => 'required|date_format:d/m/Y',
                 'out' => 'required|date_format:d/m/Y'
             ]);
-        } else {
-            // Verificar o início e fim da folha no Grupo que a pessoa pertence
-            $inicio_folha = (Grupo::getGroup($pessoa['codpes'])) ? Grupo::getGroup($pessoa['codpes'])->inicio_folha : 21;
-            $fim_folha = (Grupo::getGroup($pessoa['codpes'])) ? Grupo::getGroup($pessoa['codpes'])->fim_folha : 20;   
-            // Formato dia com dois dígitos
-            $inicio_folha = (strlen($inicio_folha) < 2) ? '0' . $inicio_folha : $inicio_folha;
-            $fim_folha = (strlen($fim_folha) < 2) ? '0' . $fim_folha : $fim_folha;
+            // Ajustando a data de fim de folha quando for Bolsista
+            if ($inicio_folha == 1) {
+                // Bolsistas Pró-Aluno, inicia dia 1º e vai até o último dia do mês
+                $request->out = Carbon::createFromFormat('d/m/Y', $request->in)->modify('last day of this month')->format('d/m/Y');
+            }            
+        } else {   
 	        // Se o dia corrente é dia 31, não estava subtraindo 1 mês em $request->in
             // https://stackoverflow.com/questions/9058523/php-date-and-strtotime-return-wrong-months-on-31st Answer #31
             $base = strtotime(date('Y-m', time()) . '-01 00:00:01'); 
