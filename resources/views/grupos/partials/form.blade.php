@@ -13,7 +13,7 @@
 
     <br> <br>
     <label for="query">Query:</label>
-    <textarea class="form-control" id="query" rows="3" name="query">{{ old('query', $grupo->query) }}</textarea>
+    <textarea class="form-control" id="query" rows="3" name="query" @if (!Gate::allows('admin')) readonly @endif>{{ old('query', $grupo->query) }}</textarea>
     <br>
 
     <label for="fim_folha">Dia que início da folha de pagamento:</label>

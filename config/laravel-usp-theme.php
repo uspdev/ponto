@@ -31,7 +31,7 @@ $menu = [
             [
                 'text' => 'Grupos',
                 'url'  => '/grupos',
-                'can' => 'admin',
+                'can' => 'boss',
             ],
         ],
     ],

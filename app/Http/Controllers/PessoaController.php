@@ -13,7 +13,7 @@ use App\Models\Registro;
 use App\Models\Grupo;
 
 use App\Utils\Util;
-
+use Illuminate\Support\Facades\Auth;
 
 class PessoaController extends Controller
 {
@@ -41,17 +41,44 @@ class PessoaController extends Controller
         $emails = Pessoa::emails($pessoa['codpes']);
         $telefones = Pessoa::telefones($pessoa['codpes']);
 
+        // Verificar o início e fim da folha no Grupo que a pessoa pertence
+        $inicio_folha = (Grupo::getGroup($pessoa['codpes'])) ? Grupo::getGroup($pessoa['codpes'])->inicio_folha : 21;
+        $fim_folha = (Grupo::getGroup($pessoa['codpes'])) ? Grupo::getGroup($pessoa['codpes'])->fim_folha : 20;
+        // Formato dia com dois dígitos
+        $inicio_folha = (strlen($inicio_folha) < 2) ? '0' . $inicio_folha : $inicio_folha;
+        $fim_folha = (strlen($fim_folha) < 2) ? '0' . $fim_folha : $fim_folha;
+
         if(!empty($request->in) and !empty($request->out)){
             $request->validate([
                 'in' => 'required|date_format:d/m/Y',
                 'out' => 'required|date_format:d/m/Y'
             ]);
-        } else {
+            // Ajustando a data de fim de folha quando for Bolsista
+            if ($inicio_folha == 1) {
+                // Bolsistas Pró-Aluno, inicia dia 1º e vai até o último dia do mês
+                $request->out = Carbon::createFromFormat('d/m/Y', $request->in)->modify('last day of this month')->format('d/m/Y');
+            }            
+        } else {   
 	        // Se o dia corrente é dia 31, não estava subtraindo 1 mês em $request->in
             // https://stackoverflow.com/questions/9058523/php-date-and-strtotime-return-wrong-months-on-31st Answer #31
-            $base = strtotime(date('Y-m',time()) . '-01 00:00:01');
-            $request->in = '21/' . date('m/Y', strtotime('-1 month', $base));
-            $request->out = "20/" . date("m/Y");
+            $base = strtotime(date('Y-m', time()) . '-01 00:00:01'); 
+            if ($inicio_folha == 1) {
+                // Bolsistas Pró-Aluno, inicia dia 1º e vai até o último dia do mês
+                $request->in = $inicio_folha . '/' . date('m/Y');
+                $request->out = Carbon::createFromFormat('d/m/Y', $request->in)->modify('last day of this month')->format('d/m/Y');
+            } else {
+                // Estagiários setores, inicia dia 21 e vai até o dia 20 do outro mês
+                // Se o dia corrente é menor ou igual ao dia de fim da folha, ex.: data corrente 01/12/2023, trazer início 21/11/2023 à 20/12/2023
+                if (now()->format('d') <= $fim_folha) {
+                    // Diminui 1 mês na data de início da folha
+                    $request->in = $inicio_folha . '/' . date('m/Y', strtotime('-1 month', $base));
+                    $request->out = $fim_folha . '/' . date("m/Y");
+                } else { 
+                    // Aumenta 1 mês na data de fim da folha
+                    $request->in = $inicio_folha . '/' . date('m/Y');
+                    $request->out = $fim_folha . '/' . date("m/Y", strtotime('+1 month', $base));
+                }
+            }
         }
 
         $in = Carbon::createFromFormat('d/m/Y H:i:s', $request->in . ' 00:00:00');
