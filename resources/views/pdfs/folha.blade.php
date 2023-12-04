@@ -82,11 +82,15 @@
             <tr>
                 <td><b>{{ $col1[0] }}</b></td>
                 <td>{{{ $col1[1] }}}</td>
-                <td>{{ $col1[2] }}</td>
+                <td @if (substr(trim($col1[0]), -4) == 'Sáb' || substr(trim($col1[0]), -3) == 'Dom') style="background-color: #ccc;" @endif>
+                    {{ $col1[2] }}
+                </td>
 
                 <td><b>{{ $col2[0] }}</b></td>
                 <td>{{{ $col2[1] }}}</td>
-                <td>{{ $col2[2] }}</td>
+                <td @if (substr(trim($col2[0]), -4) == 'Sáb' || substr(trim($col2[0]), -3) == 'Dom') style="background-color: #ccc;" @endif>
+                    {{ $col2[2] }}
+                </td>
             </tr>
         @endfor
     </table>
