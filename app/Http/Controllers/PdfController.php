@@ -15,7 +15,7 @@ use App\Models\Grupo;
 class PdfController extends Controller
 {
     public function folha(Request $request, $codpes){
-        $this->authorize('boss',$codpes);
+        $this->authorize('owner',$codpes);
 
         $request->validate([
             'in' => 'required|date_format:d/m/Y',

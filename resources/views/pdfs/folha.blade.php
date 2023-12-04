@@ -73,8 +73,8 @@
                 @php $col1 = ['','',''] @endphp
             @endif
 
-            @if(array_key_exists($i+16, $dias))  
-                @php $col2 = App\Utils\Util::computeDayMinutes($computes,$dias[$i+16]); @endphp
+            @if(array_key_exists($i+17, $dias))  
+                @php $col2 = App\Utils\Util::computeDayMinutes($computes,$dias[$i+17]); @endphp
             @else 
                 @php $col2 = ['','',''] @endphp
             @endif
