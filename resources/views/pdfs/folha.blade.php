@@ -66,7 +66,7 @@
             <td style='width:20%'>Registro</td>
         </tr>
 
-        @for($i = 0; $i <= 16; $i++)
+        @for($i = 0; $i < 16; $i++)
             @if(array_key_exists($i, $dias))  
                 @php $col1 = App\Utils\Util::computeDayMinutes($computes,$dias[$i]); @endphp
             @else 
