@@ -66,15 +66,15 @@
             <td style='width:20%'>Registro</td>
         </tr>
 
-        @for($i = 0; $i <= 16; $i++)
+        @for($i = 0; $i < 16; $i++)
             @if(array_key_exists($i, $dias))  
                 @php $col1 = App\Utils\Util::computeDayMinutes($computes,$dias[$i]); @endphp
             @else 
                 @php $col1 = ['','',''] @endphp
             @endif
 
-            @if(array_key_exists($i+17, $dias))  
-                @php $col2 = App\Utils\Util::computeDayMinutes($computes,$dias[$i+17]); @endphp
+            @if(array_key_exists($i+16, $dias))  
+                @php $col2 = App\Utils\Util::computeDayMinutes($computes,$dias[$i+16]); @endphp
             @else 
                 @php $col2 = ['','',''] @endphp
             @endif
