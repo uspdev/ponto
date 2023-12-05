@@ -13,6 +13,12 @@
             border-left: none;
             border-right: none;
         }
+        
+        td.registros {
+            font-size: 0.75em;
+            font-style: italic;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -80,13 +86,13 @@
             @endif
 
             <tr>
-                <td><b>{{ $col1[0] }}</b></td>
-                <td>{{{ $col1[1] }}} <span style="font-size: 0.75em; font-style: italic; font-weight: bold;">{{ $datas[substr($col1[0], 0, 2)]['texto'] ?? '' }}</span></td>
-                <td @if (!empty($datas[substr($col1[0], 0, 2)]['texto'])) style="background-color: #ccc;" @endif>{{ $col1[2] }}</td>
+                <td class="registros">{{ $col1[0] }}</td>
+                <td class="registros">{{ $col1[1] }} {{ $datas[substr($col1[0], 0, 2)]['texto'] ?? '' }}</td>
+                <td class="registros" @if (!empty($datas[substr($col1[0], 0, 2)]['texto'])) style="background-color: #ccc;" @endif>{{ $col1[2] }}</td>
 
-                <td><b>{{ $col2[0] }}</b></td>
-                <td>{{{ $col2[1] }}} <span style="font-size: 0.75em; font-style: italic; font-weight: bold;">{{ $datas[substr($col2[0], 0, 2)]['texto'] ?? '' }}</span></td>
-                <td @if (!empty($datas[substr($col2[0], 0, 2)]['texto'])) style="background-color: #ccc;" @endif>{{ $col2[2] }} </td>
+                <td class="registros">{{ $col2[0] }}</td>
+                <td class="registros">{{ $col2[1] }} {{ $datas[substr($col2[0], 0, 2)]['texto'] ?? '' }}</td>
+                <td class="registros" @if (!empty($datas[substr($col2[0], 0, 2)]['texto'])) style="background-color: #ccc;" @endif>{{ $col2[2] }} </td>
             </tr>
         @endfor
     </table>
