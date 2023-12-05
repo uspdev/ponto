@@ -108,4 +108,28 @@ class Util
         
         return [$day,$registros, self::formatMinutes($minutos_do_dia)];
     }
+
+    /**
+     * Método que retorna o feriado
+     * recebe $dia em formato string Y-m-d
+     * retorna array do feriado
+     * https://api.invertexto.com (mais completa)
+     *
+     * @param string $dia
+     * @return array $feriado
+     */
+    public function obterFeriado($dia) {
+        $dia = Carbon::createFromFormat('Y-m-d', $dia);
+        $year = $dia->format('Y');
+        $url = 'https://api.invertexto.com/v1/holidays/' . $year . '?token=' . env('TOKEN_INVERTEXTO') . '&state=SP'; # São Paulo 
+        $feriados = json_decode(file_get_contents($url)); 
+        // Será que dá pra melhorar sem ter que iterar
+        $feriado = [];
+        foreach ($feriados as $a) {
+            if ($dia->format('Y-m-d') == $a->date) {
+                $feriado = $a;
+            } 
+        }
+        return $feriado;
+    }   
 }
