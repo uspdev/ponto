@@ -113,22 +113,27 @@ class Util
      * Método que retorna o feriado
      * recebe $dia em formato string Y-m-d
      * retorna array do feriado
-     * https://api.invertexto.com (mais completa)
+     * https://api.invertexto.com
      *
      * @param string $dia
      * @return array $feriado
      */
-    public function obterFeriado($dia) {
+     public function obterFeriado($dia) {
         $dia = Carbon::createFromFormat('Y-m-d', $dia);
         $year = $dia->format('Y');
-        $url = 'https://api.invertexto.com/v1/holidays/' . $year . '?token=' . env('TOKEN_INVERTEXTO') . '&state=SP'; # São Paulo 
-        $feriados = json_decode(file_get_contents($url)); 
-        // Será que dá pra melhorar sem ter que iterar
+        if (config('ponto.comoObterFeriados') == 'on') {
+            $url = 'https://api.invertexto.com/v1/holidays/' . $year . '?token=' . config('ponto.tokenInvertexto') . '&state=' . config('ponto.ufFeriados');
+            $feriados = json_decode(file_get_contents($url), true);
+            file_put_contents('../storage/app/feriados/' . $year . '.json', file_get_contents($url));
+        } else {
+            $url = '../storage/app/feriados/' . $year . '.json'; 
+            $feriados = json_decode(file_get_contents($url), true);
+        }    
         $feriado = [];
-        foreach ($feriados as $a) {
-            if ($dia->format('Y-m-d') == $a->date) {
-                $feriado = $a;
-            } 
+        foreach ($feriados as $key => $val) {
+            if ($val['date'] === $dia->format('Y-m-d')) {
+                $feriado = $feriados[$key];
+            }
         }
         return $feriado;
     }   

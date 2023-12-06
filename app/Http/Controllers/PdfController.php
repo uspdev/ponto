@@ -34,7 +34,7 @@ class PdfController extends Controller
             if ($data->isSaturday() || $data->isSunday()) {
                 $texto = ucfirst($data->locale('pt_Br')->dayName);
             } elseif (!empty($feriado)) {
-                $texto = $feriado->name;
+                $texto = $feriado['name'];
             } else {
                 $style = '';
                 $texto = '';                
@@ -44,8 +44,6 @@ class PdfController extends Controller
                 'texto' => $texto,
             ];    
         }
-
-        // dd($datas);
 
         $computes = Util::compute($codpes, $in, $out);
         
