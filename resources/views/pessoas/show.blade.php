@@ -49,10 +49,13 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Frequência</h5>
+            
+            @if (config('ponto.gerarFolha') == 'yes')
             <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
               Gerar folha de frequência
               <i class="fas fa-solid fa-file-pdf"></i><br />
             </a>
+            @endif
 
             <br>
             <b>Total no período: </b>{{ $total }} <br>
