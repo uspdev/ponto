@@ -30,6 +30,7 @@ class GrupoRequest extends FormRequest
             'codpes_autorizador' => 'required|integer',
             'inicio_folha' => 'required|integer',
             'fim_folha' => 'required|integer',
+            'carga_horaria' => 'required|integer',
         ];
 
         return $rules;
