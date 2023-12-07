@@ -2,12 +2,12 @@
   <br>
   @if($registro->type == 'in')
     <i class="fas fa-sign-in-alt text-success"></i>
-      <a href="/registros/{{ $registro->id }}">
-      ({{ $registro->status }}) {{ $registro->created_at->format('d/m/Y - H:i') }} (Entrada)</a>
+      @can('boss') <a href="/registros/{{ $registro->id }}"> @endcan
+      ({{ $registro->status }}) {{ $registro->created_at->format('d/m/Y - H:i') }} (Entrada) @can('boss') </a> @endcan
   @else
     <i class="fas fa-sign-out-alt text-danger"></i>
-      <a href="/registros/{{ $registro->id }}">
-      ({{ $registro->status }}) {{ $registro->created_at->format('d/m/Y - H:i') }} (Saída)</a>
+      @can('boss') <a href="/registros/{{ $registro->id }}"> @endcan
+      ({{ $registro->status }}) {{ $registro->created_at->format('d/m/Y - H:i') }} (Saída) @can('boss') </a> @endcan
   @endif
 
   @can('admin')

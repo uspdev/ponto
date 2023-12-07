@@ -8,17 +8,14 @@
   </div>
   <div class="card-body">
     <div class="row">
+      
       <div class="col-lg-auto p-3">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Foto</h5>
             <img style="width: 100px; float: left;" src="data:image/png;base64, {{ \Uspdev\Wsfoto::obter($pessoa['codpes']) }}" alt="foto">
           </div>
-        </div>
-      </div>
-      <div class="col-lg-3 p-3">
-
-        <div class="card">
+          
           <div class="card-body">
             <h5 class="card-title">Contato</h5>
             @foreach ($emails as $email)
@@ -42,26 +39,24 @@
               <button type="submit" class="btn btn-success">Filtrar</button>
             </form>
           </div>
-        </div>
 
-        <br>
+        </div>
+      </div>
+      <div class="col-lg-3 p-3">
 
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Frequência</h5>
             
-            {{-- Testar quando pode ou não gerar a folha --}}
-            @if (config('ponto.gerarFolha') == 'no')
-              @can('boss')
-              <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
-                Gerar folha de frequência
-                <i class="fas fa-solid fa-file-pdf"></i><br />
-              </a>
-              @endcan
-            @endif
+            @can('boss')
+            <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
+              Gerar folha de frequência
+              <i class="fas fa-solid fa-file-pdf"></i><br />
+            </a>
+            @endcan
 
             @php
-              $carga_horaria_semanal = App\Models\Grupo::getGroup($pessoa['codpes'])->carga_horaria;
+              $carga_horaria_semanal = (!App\Models\Grupo::getGroup($pessoa['codpes'])) ? 0 : App\Models\Grupo::getGroup($pessoa['codpes'])->carga_horaria;
               $carga_horaria_diaria = $carga_horaria_semanal / 5;
               $quantidade_dias_uteis = App\Utils\Util::contarDiasUteis(request()->in, request()->out); 
               $carga_horaria_total = $quantidade_dias_uteis * $carga_horaria_diaria;
