@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="codpes"><b>Número USP</b></label>
-                        <input type="number" class="" name="codpes" placeholder="Digite seu Nº USP" value="{{ old('codpes') }}">
+                        <input type="number" class="" name="codpes" placeholder="Digite seu Nº USP" value="{{ Auth::user()->codpes }}">
                     </div>
                     <div class="form-group">
                         <label for="place_id"><b>Local</b></label>
