@@ -31,25 +31,7 @@ class PdfController extends Controller
         $in = Carbon::createFromFormat('d/m/Y',$request->in);
         $out = Carbon::createFromFormat('d/m/Y',$request->out);
 
-        // Array com dia e fundo #ccc quando fim de semana e feriado
-        $periodo = CarbonPeriod::between($in->format('Y-m-d'), $out->format('Y-m-d'));
-        $datas = [];
-        foreach ($periodo as $data) {
-            $feriado = Util::obterFeriado($data->format('Y-m-d'));
-            $style = 'style="background-color: #ccc;"';
-            if ($data->isSaturday() || $data->isSunday()) {
-                $texto = ucfirst($data->locale('pt_Br')->dayName);
-            } elseif (!empty($feriado)) {
-                $texto = $feriado['name'];
-            } else {
-                $style = '';
-                $texto = '';                
-            }
-            $datas[$data->format('d')] = [
-                'style' => $style,
-                'texto' => $texto,
-            ];    
-        }
+        $datas = Util::listarDiasUteis($in->format('d/m/Y'), $out->format('d/m/Y'));
 
         $computes = Util::compute($codpes, $in, $out);
         

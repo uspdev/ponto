@@ -84,6 +84,8 @@ class PessoaController extends Controller
         $in = Carbon::createFromFormat('d/m/Y H:i:s', $request->in . ' 00:00:00');
         $out = Carbon::createFromFormat('d/m/Y H:i:s', $request->out . ' 23:59:59');
 
+        $datas = Util::listarDiasUteis($in->format('d/m/Y'), $out->format('d/m/Y'));
+        
         $computes = Util::compute($pessoa['codpes'], $in, $out);
 
         if(count($computes) > 31) {
@@ -105,7 +107,8 @@ class PessoaController extends Controller
             'telefones' => $telefones,
             'registros' => $registros,
             'computes'  => $computes,
-            'total'     => Util::computeTotal($computes)
+            'total'     => Util::computeTotal($computes),
+            'datas'     => $datas,
         ]);
      }
 }

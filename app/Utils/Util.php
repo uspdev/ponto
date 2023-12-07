@@ -108,7 +108,7 @@ class Util
         
         return [$day,$registros, self::formatMinutes($minutos_do_dia)];
     }
-
+    
     /**
      * Método que retorna o feriado
      * recebe $dia em formato string Y-m-d
@@ -120,15 +120,13 @@ class Util
      */
      public function obterFeriado($dia) {
         $dia = Carbon::createFromFormat('Y-m-d', $dia);
-        $year = $dia->format('Y');
-        if (config('ponto.comoObterFeriados') == 'on') {
-            $url = 'https://api.invertexto.com/v1/holidays/' . $year . '?token=' . config('ponto.tokenInvertexto') . '&state=' . config('ponto.ufFeriados');
-            $feriados = json_decode(file_get_contents($url), true);
-            file_put_contents('../storage/app/feriados/' . $year . '.json', file_get_contents($url));
-        } else {
-            $url = '../storage/app/feriados/' . $year . '.json'; 
-            $feriados = json_decode(file_get_contents($url), true);
-        }    
+        $ano = $dia->format('Y');
+        $url = 'https://api.invertexto.com/v1/holidays/' . $ano . '?token=' . config('ponto.tokenInvertexto') . '&state=' . config('ponto.ufFeriados');
+        $arquivoFeriados = '../storage/app/feriados/' . $ano . '.json';
+        if (!file_exists($arquivoFeriados)) {
+            file_put_contents('../storage/app/feriados/' . $ano . '.json', file_get_contents($url));
+        } 
+        $feriados = json_decode(file_get_contents($arquivoFeriados), true);   
         $feriado = [];
         foreach ($feriados as $key => $val) {
             if ($val['date'] === $dia->format('Y-m-d')) {
@@ -136,5 +134,58 @@ class Util
             }
         }
         return $feriado;
-    }   
+    } 
+    
+    /**
+     * Método que retorna a quantidade de dias úteis
+     * recebe $in e $out em formato string d/m/Y
+     * retorna int $dias
+     * 
+     * @param string $in
+     * @param string $out
+     * @return int $dias
+     */
+    public function contarDiasUteis($in, $out) {
+        $in = Carbon::createFromFormat('d/m/Y', $in);
+        $out = Carbon::createFromFormat('d/m/Y', $out);
+        $periodo = CarbonPeriod::between($in, $out);
+        $dias = 0;
+        foreach ($periodo as $data) {
+            if (!$data->isSaturday() && !$data->isSunday() && empty(self::obterFeriado($data->format('Y-m-d')))) $dias++;    
+        }  
+        return $dias;  
+    }
+
+    /**
+     * Método que retorna a lista de dias úteis
+     * recebe $in e $out em formato string d/m/Y
+     * retorna array $datas
+     * 
+     * @param string $in
+     * @param string $out
+     * @return array $datas
+     */    
+    public function listarDiasUteis($in, $out) {
+        $in = Carbon::createFromFormat('d/m/Y', $in);
+        $out = Carbon::createFromFormat('d/m/Y', $out);
+        $periodo = CarbonPeriod::between($in->format('Y-m-d'), $out->format('Y-m-d'));
+        $datas = [];
+        foreach ($periodo as $data) {
+            $feriado = Util::obterFeriado($data->format('Y-m-d'));
+            $style = 'style="background-color: #ccc;"';
+            if ($data->isSaturday() || $data->isSunday()) {
+                $texto = ucfirst($data->locale('pt_Br')->dayName);
+            } elseif (!empty($feriado)) {
+                $texto = $feriado['name'];
+            } else {
+                $style = '';
+                $texto = '';                
+            }
+            $datas[$data->format('d')] = [
+                'style' => $style,
+                'texto' => $texto,
+            ];    
+        }
+        return $datas;
+    }
 }
