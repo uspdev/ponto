@@ -66,8 +66,8 @@
               $quantidade_dias_uteis = App\Utils\Util::contarDiasUteis(request()->in, request()->out); 
               $carga_horaria_total = $quantidade_dias_uteis * $carga_horaria_diaria;
               $arrayTotal = (!empty($total)) ? array_map('trim', explode('e', $total)) : [];
-              $total_horas = (!empty($arrayTotal)) ? substr($arrayTotal[0], 0, 2) : 0;
-              $total_minutos = (!empty($arrayTotal[1])) ? substr($arrayTotal[1], 0, 2) : 0;
+              $total_horas = (!empty($arrayTotal)) ? trim(substr($arrayTotal[0], 0, 2)) : 0;
+              $total_minutos = (!empty($arrayTotal[1])) ? trim(substr($arrayTotal[1], 0, 2)) : 0;
               $total_registrado = (!empty($total)) ? $total : '0 horas';
               $saldo = ($total_horas == 0) ? $carga_horaria_total . ' horas' : ($carga_horaria_total - $total_horas) - 1 . ' horas e ' . (60 - $total_minutos) . ' minutos';
             @endphp  
