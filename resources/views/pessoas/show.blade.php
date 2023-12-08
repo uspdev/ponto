@@ -29,6 +29,15 @@
 
         <br>
 
+        @php
+          $inBack = \Carbon\Carbon::createFromFormat('d/m/Y', request()->in)->subMonth()->format('d/m/Y');
+          $outBack = \Carbon\Carbon::createFromFormat('d/m/Y', request()->out)->subMonth()->format('d/m/Y');
+          $inNext = \Carbon\Carbon::createFromFormat('d/m/Y', request()->in)->addMonth()->format('d/m/Y');
+          $outNext = \Carbon\Carbon::createFromFormat('d/m/Y', request()->out)->addMonth()->format('d/m/Y'); 
+          $route = last(explode('/', URL::current()));
+          $url = ($route == 'my') ? '/pessoas/my' : '/pessoas/' . $pessoa['codpes'] ;
+        @endphp
+        
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Filtrar período:</h5>
@@ -36,25 +45,21 @@
               Início: <input name="in" value="{{ request()->in }}"><br>
               <br>
               Fim: <input name="out" value="{{ request()->out }}"><br><br>
-              <button type="submit" class="btn btn-success">Filtrar</button>
+              <button type="submit" class="btn btn-success"><i class="fa fa-solid fa-filter"></i> Filtrar</button> 
+              <a href="{{ $url }}?in={{ $inBack }}&out={{ $outBack }}" 
+                class="btn btn-secondary"><i class="fa fa-solid fa-arrow-left"></i> Anterior</a> 
+              <a href="{{ $url }}?in={{ $inNext }}&out={{ $outNext }}" 
+                class="btn btn-secondary"><i class="fa fa-solid fa-arrow-right"></i> Próximo</a>
             </form>
           </div>
-
         </div>
-      </div>
-      <div class="col-lg-3 p-3">
+        
+        <br />
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Frequência</h5>
+            <h5 class="card-title">Totalizador</h5>
             
-            @can('boss')
-            <a href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
-              Gerar folha de frequência
-              <i class="fas fa-solid fa-file-pdf"></i><br />
-            </a>
-            @endcan
-
             @php
               $carga_horaria_semanal = (!App\Models\Grupo::getGroup($pessoa['codpes'])) ? 0 : App\Models\Grupo::getGroup($pessoa['codpes'])->carga_horaria;
               $carga_horaria_diaria = $carga_horaria_semanal / 5;
@@ -67,13 +72,31 @@
               $saldo = ($total_horas == 0) ? $carga_horaria_total . ' horas' : ($carga_horaria_total - $total_horas) - 1 . ' horas e ' . (60 - $total_minutos) . ' minutos';
             @endphp  
 
-            <br>
             <strong>Carga horária semanal:</strong> {{ $carga_horaria_semanal }} horas<br />
             <strong>Quantidade de dias úteis:</strong> {{ $quantidade_dias_uteis }} <br />
             <strong>Carga horária total: </strong>{{ $carga_horaria_total }} horas<br>
             <strong>Total registrado: </strong>{{ $total_registrado }} <br />
-            <strong>Saldo:</strong> <span @if ($total_horas <= $carga_horaria_total) style="color: #f00;" @endif>{{ $saldo }}</span><br /><br />
-            <table class="table">
+            <strong>Saldo:</strong> <span @if ($total_horas <= $carga_horaria_total) style="color: #f00;" @endif>{{ $saldo }}</span>
+
+            <br /><br />
+
+            @can('boss')
+            <a class="btn btn-info" href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
+              Gerar folha de frequência <i class="fas fa-solid fa-file-pdf"></i><br />
+            </a>
+            @endcan
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-3 p-3">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Frequência</h5>
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Dia</th>
@@ -111,13 +134,18 @@
       </div>
       <div class="col-lg-7 p-3">
         <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Registros</h5>
-          <ul class="list-group list-group-flush">
-              <li class="list-group-item">
+          <div class="card-body">
+            <h5 class="card-title">Registros</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Registro</th>
+                </tr>
+              </thead>
+              <tbody> 
                 @include('pessoas.partials.form')
-              </li>
-            </ul>
+              </tbody>
+            </table>        
           </div>
         </div>
       </div>

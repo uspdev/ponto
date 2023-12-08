@@ -43,6 +43,19 @@
             @include('registros.partials.analisar')
         @endif
         <br />
+
+        @can('boss')
+            @if($registro->status == 'válido')
+            <form style="display: inline;" method="POST" action="registros/{{ $registro->id }}/invalidate">
+                @csrf
+                @method('PATCH')
+                <button type="submit" class="btn btn-danger" title="Invalidar registro"><i class="fa fa-thumbs-down"></i> Invalidar</button>
+            </form>
+            @else
+            {{ $registro->analise }}
+            @endif
+        @endcan
+
         <a href="{{ URL::previous() }}" class="btn btn-secondary">Voltar</a>
     </div>
 </div>
