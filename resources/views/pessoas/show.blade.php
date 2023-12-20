@@ -69,14 +69,31 @@
               $total_horas = (!empty($arrayTotal)) ? trim(substr($arrayTotal[0], 0, 2)) : 0;
               $total_minutos = (!empty($arrayTotal[1])) ? trim(substr($arrayTotal[1], 0, 2)) : 0;
               $total_registrado = (!empty($total)) ? $total : '0 horas';
-              $saldo = ($total_horas == 0) ? $carga_horaria_total . ' horas' : ($carga_horaria_total - $total_horas) - 1 . ' horas e ' . (60 - $total_minutos) . ' minutos';
+              $sdh = $carga_horaria_total - $total_horas;
+              $sdm = 0 - $total_minutos;
+              if ($sdm < 0) {
+                $sdm = $sdm * -1;
+              } 
+              if ($sdh > 0) {
+                $sdm = 60 - $total_minutos;
+              }
+              if ($sdm == 60) {
+                $sdm = 0;
+              }
+              if ($sdh > 0 && $sdm > 0) {
+                $sdh = $sdh - 1;
+              }
+              $sdt = "$sdh horas";
+              if ($sdm > 0) {
+                $sdt = $sdt . " $sdm minutos"; 
+              }
             @endphp  
 
             <strong>Carga horária semanal:</strong> {{ $carga_horaria_semanal }} horas<br />
             <strong>Quantidade de dias úteis:</strong> {{ $quantidade_dias_uteis }} <br />
             <strong>Carga horária total: </strong>{{ $carga_horaria_total }} horas<br>
             <strong>Total registrado: </strong>{{ $total_registrado }} <br />
-            <strong>Saldo:</strong> <span @if ($total_horas <= $carga_horaria_total) style="color: #f00;" @endif>{{ $saldo }}</span>
+            <strong>Saldo:</strong> <span @if ($total_horas < $carga_horaria_total) style="color: #f00;" @endif>{{ $sdt }}</span>
 
             <br /><br />
 
