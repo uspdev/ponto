@@ -52,7 +52,7 @@
                 <button type="submit" class="btn btn-danger" title="Invalidar registro"><i class="fa fa-thumbs-down"></i> Invalidar</button>
             </form>
             @else
-            {{ $registro->analise }}
+            {{-- $registro->analise --}}
             @endif
         @endcan
 
