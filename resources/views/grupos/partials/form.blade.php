@@ -22,7 +22,11 @@
     <br> <br>
     <label for="inicio_folha">Dia que fecha da folha de pagamento:</label>
     <input type="number" id="fim_folha" name="fim_folha" value="{{ old('fim_folha', $grupo->fim_folha) }}">
-    
+
+    <br> <br>
+    <label for="carga_horaria">Carga horária semanal:</label>
+    <input type="number" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria', $grupo->carga_horaria) }}">    
+
     <br> <br>
     <button type="submit" class="btn btn-primary">Enviar</button>
 

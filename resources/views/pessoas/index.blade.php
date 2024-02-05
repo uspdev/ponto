@@ -12,7 +12,7 @@
 
     <div class="card">
       <div class="card-header font-weight-bold">
-      {{ $grupo->name }}
+      {{ $grupo->name }}: {{ $grupo->carga_horaria }} horas semanais
       </div>
       <div class="card-body">
         <table class="table table-sm table-striped table-hover datatable-pessoas">

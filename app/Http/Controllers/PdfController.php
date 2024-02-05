@@ -15,7 +15,13 @@ use App\Models\Grupo;
 class PdfController extends Controller
 {
     public function folha(Request $request, $codpes){
-        $this->authorize('owner',$codpes);
+        if (config('ponto.gerarFolha') == 'yes') {
+            $permission = 'owner';
+        } else {
+            $permission = 'boss';
+        }
+        
+        $this->authorize($permission, $codpes);
 
         $request->validate([
             'in' => 'required|date_format:d/m/Y',
@@ -24,6 +30,8 @@ class PdfController extends Controller
 
         $in = Carbon::createFromFormat('d/m/Y',$request->in);
         $out = Carbon::createFromFormat('d/m/Y',$request->out);
+
+        $datas = Util::listarDiasUteis($in->format('d/m/Y'), $out->format('d/m/Y'));
 
         $computes = Util::compute($codpes, $in, $out);
         
@@ -51,9 +59,10 @@ class PdfController extends Controller
             'out'      => $request->out,
             'total'    => Util::computeTotal($computes),
             'codpes'             => $codpes,
-            'codpes_supervisor'  =>  $codpes_supervisor,
-            'nome'               =>  $nome,
-            'nome_supervisor'    =>  $nome_supervisor,
+            'codpes_supervisor'  => $codpes_supervisor,
+            'nome'               => $nome,
+            'nome_supervisor'    => $nome_supervisor,
+            'datas'              => $datas,
         ]);
 
         return $pdf->download("$codpes.pdf");

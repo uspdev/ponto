@@ -13,6 +13,12 @@
             border-left: none;
             border-right: none;
         }
+        
+        td.registros {
+            font-size: 0.75em;
+            font-style: italic;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -68,25 +74,25 @@
 
         @for($i = 0; $i < 16; $i++)
             @if(array_key_exists($i, $dias))  
-                @php $col1 = App\Utils\Util::computeDayMinutes($computes,$dias[$i]); @endphp
+                @php $col1 = App\Utils\Util::computeDayMinutes($computes,$dias[$i]) @endphp
             @else 
                 @php $col1 = ['','',''] @endphp
             @endif
 
             @if(array_key_exists($i+16, $dias))  
-                @php $col2 = App\Utils\Util::computeDayMinutes($computes,$dias[$i+16]); @endphp
+                @php $col2 = App\Utils\Util::computeDayMinutes($computes,$dias[$i+16]) @endphp
             @else 
                 @php $col2 = ['','',''] @endphp
             @endif
 
             <tr>
-                <td><b>{{ $col1[0] }}</b></td>
-                <td>{{{ $col1[1] }}}</td>
-                <td>{{ $col1[2] }}</td>
+                <td class="registros">{{ $col1[0] }}</td>
+                <td class="registros">{{ $col1[1] }} {{ $datas[substr($col1[0], 0, 2)]['texto'] ?? '' }}</td>
+                <td class="registros" @if (!empty($datas[substr($col1[0], 0, 2)]['texto'])) style="background-color: #ccc;" @endif>{{ $col1[2] }}</td>
 
-                <td><b>{{ $col2[0] }}</b></td>
-                <td>{{{ $col2[1] }}}</td>
-                <td>{{ $col2[2] }}</td>
+                <td class="registros">{{ $col2[0] }}</td>
+                <td class="registros">{{ $col2[1] }} {{ $datas[substr($col2[0], 0, 2)]['texto'] ?? '' }}</td>
+                <td class="registros" @if (!empty($datas[substr($col2[0], 0, 2)]['texto'])) style="background-color: #ccc;" @endif>{{ $col2[2] }} </td>
             </tr>
         @endfor
     </table>

@@ -15,6 +15,7 @@
           <th scope="col">Nome</th>
           <th scope="col">Supervisor</th>
           <th scope="col">Autorizador</th>
+          <th scope="col">Carga horária semanal</th>
           <th scope="col">Operações</th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
           <td>{{ $grupo->name }}</td>
           <td>{{ $grupo->codpes_supervisor }}</td>
           <td>{{ $grupo->codpes_autorizador }}</td>
+          <td>{{ $grupo->carga_horaria }}</td>
           <td align="center">
             <a href="/grupos/{{$grupo->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
               @can ('admin')

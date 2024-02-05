@@ -6,6 +6,9 @@ Registro de ponto de monitores das salas Pró-Aluno.
 
 * Registro de ponto com foto.
 * Supervisor e autorizador podem acompanhar o ponto das pessoas nos seus grupos. Para isso, após o supervisor ou autorizador logar no sistema, através da rota /senhaunica-users pode-se adicionar essa pessoa à permissão hireárquica **boss**.
+* Cálculo de dias úteis.
+* Carga horária semanal.
+* Feriados através da API Invertexto disponível em https://api.invertexto.com
 
 ## Em produção
 
@@ -24,6 +27,8 @@ Para receber as últimas atualizações do sistema rode:
     composer install
     cp .env.example .env
     php artisan key:generate
+    mkdir storage/app/feriados
+    chmod -R 777 storage/app/feriados
 
 ### Senha única
 
@@ -67,3 +72,4 @@ Estagiários da STI FFLCH:
 - 14/06/2022 - Exibindo informações e foto do registro
 - 31/05/2022 - Código da sala de monitoria parametrizado
 - 27/11/2023 - Supervisor e autorizador podem ver o ponto das pessosas nos seus grupos
+- 07/12/2023 - Carga horária semanal, feriados, dias úteis e saldo de horas
