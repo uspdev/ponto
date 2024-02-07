@@ -2,7 +2,6 @@
 
 @section('content')
 
-
   <form enctype="multipart/form-data" method="POST">
     @csrf
     <div class="form-group">

@@ -26,7 +26,7 @@
     <table style='width:100%'>
         <tr>
             <td width='12%' style='text-align:center;'>
-                <img src='https://imagens.usp.br/wp-content/uploads/USP-Bras%C3%A3o-466x540.jpg' height='60px'/>
+                <img src="{{  asset('USP-Brasao-466x540.jpg') }}" height='60px'/>
             </td>
             <td width='76%' style='text-align:center;'>
                 <p align='center'><b>UNIVERSIDADE DE SÃO PAULO</b>
