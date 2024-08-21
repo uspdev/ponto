@@ -14,7 +14,7 @@ use Carbon\CarbonInterval;
 class Util
 {    
 
-    public function compute($codpes, $in, $out){
+    public static function compute($codpes, $in, $out){
         $period = CarbonPeriod::between($in, $out);
         $computes = [];
         
@@ -64,7 +64,7 @@ class Util
         return $computes;
     }
 
-    public function computeTotal($computes){
+    public static function computeTotal($computes){
         $minutes = 0;
         foreach($computes as $day){
             foreach($day as $entries){
@@ -76,7 +76,7 @@ class Util
         return self::formatMinutes($minutes);
     }
 
-    public function formatMinutes($minutes){
+    public static function formatMinutes($minutes){
         $h = floor($minutes / 60);
         $m = $minutes -   floor($minutes / 60) * 60;
         if($h == 1 and $m == 1) return "{$h} hora e ${m} minuto";
@@ -91,7 +91,7 @@ class Util
         return "{$h} horas e ${m} minutos";
     }
 
-    public function computeDayMinutes($computes, $day) {
+    public static function computeDayMinutes($computes, $day) {
         $minutos_do_dia = 0;
         $registros = '';
 
@@ -118,7 +118,7 @@ class Util
      * @param string $dia
      * @return array $feriado
      */
-     public function obterFeriado($dia) {
+     public static function obterFeriado($dia) {
         $dia = Carbon::createFromFormat('Y-m-d', $dia);
         $ano = $dia->format('Y');
         $url = 'https://api.invertexto.com/v1/holidays/' . $ano . '?token=' . config('ponto.tokenInvertexto') . '&state=' . config('ponto.ufFeriados');
@@ -145,7 +145,7 @@ class Util
      * @param string $out
      * @return int $dias
      */
-    public function contarDiasUteis($in, $out) {
+    public static function contarDiasUteis($in, $out) {
         $in = Carbon::createFromFormat('d/m/Y', $in);
         $out = Carbon::createFromFormat('d/m/Y', $out);
         $periodo = CarbonPeriod::between($in, $out);
@@ -165,7 +165,7 @@ class Util
      * @param string $out
      * @return array $datas
      */    
-    public function listarDiasUteis($in, $out) {
+    public static function listarDiasUteis($in, $out) {
         $in = Carbon::createFromFormat('d/m/Y', $in);
         $out = Carbon::createFromFormat('d/m/Y', $out);
         $periodo = CarbonPeriod::between($in->format('Y-m-d'), $out->format('Y-m-d'));
