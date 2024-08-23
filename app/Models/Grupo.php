@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Grupo;
-
 use Uspdev\Replicado\DB;
 
 class Grupo extends Model
