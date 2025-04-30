@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-header font-weight-bold">
-      Sala Pró-Aluno
+      Monitores da sala Pró-Aluno
       </div>
       <div class="card-body">
         <table class="table table-sm table-striped table-hover datatable-pessoas">
@@ -55,6 +55,9 @@
                 , 'csvHtml5'
             ]
         });
+        // Na lista de monitores da sala pró-Aluno
+        // não é necessário mostrar o item "Registrar ponto"
+        $("#menu").hide();
     });
 </script>
 @endsection
