@@ -10,14 +10,12 @@
         <table class="table table-sm table-striped table-hover datatable-pessoas">
           <thead>
             <tr>
-              <th scope="col">Nº USP</th>
               <th scope="col">Nome</th>
             </tr>
           </thead>
           <tbody>
             @foreach($pessoas as $pessoa)
             <tr>
-                <td>{{ $pessoa["codpes"] }}</td>
                 <td>{{ \Uspdev\Replicado\Pessoa::obterNome($pessoa["codpes"]) }}</td>
             </tr>
             @endforeach
@@ -36,7 +34,7 @@
         var table = $('.datatable-pessoas').DataTable({
             dom: '<t>'
             , ordering: true
-            , order: ['1', 'asc'] /* ordenando por nome asc */
+            , order: ['0', 'asc'] /* ordenando por nome asc */
             , language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
             }
@@ -55,9 +53,10 @@
                 , 'csvHtml5'
             ]
         });
-        // Na lista de monitores da sala pró-Aluno
-        // não é necessário mostrar o item "Registrar ponto"
-        $("#menu").hide();
+
+        @if(!Auth::check())
+            $("#menu").hide();
+        @endif
     });
 </script>
 @endsection
