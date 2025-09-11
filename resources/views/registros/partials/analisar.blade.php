@@ -10,23 +10,23 @@
                 @method('PATCH')
                 <div class="row">
                     <div class="col-sm">
-                        <div class="form-check">
+                        <div class="form-check d-inline mr-2">
                             <input class="form-check-input" type="radio" name="status" value="válido" required>
                             <label class="form-check-label" for="flexRadioDefault1">
-                                <h5><span class="badge bg-success text-light"><i class="fa fa-thumbs-up"></i> Validar</span></h5>
+                                <h5><span class="badge bg-success text-light p-2"><i class="fa fa-thumbs-up"></i> Validar</span></h5>
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check d-inline">
                             <input class="form-check-input" type="radio" name="status" value="inválido" required>
                             <label class="form-check-label" for="flexRadioDefault2">
-                                <h5><span class="badge bg-danger text-light"><i class="fa fa-thumbs-down"></i> Invalidar</span></h5>
+                                <h5><span class="badge bg-danger text-light p-2"><i class="fa fa-thumbs-down"></i> Invalidar</span></h5>
                             </label>
                         </div>
                         <div id="div_analise" class="form-group" style="display: none;">
-                            <label for="analise">Análise</label>
+                            <label for="analise">Motivo</label>
                             <input type="text" class="form-control" name="analise" placeholder="Qual o motivo de invalidar?">
                         </div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-primary d-block mt-2">Salvar</button>
                     </div>
                 </div>
             </form>
