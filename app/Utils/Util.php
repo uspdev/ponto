@@ -73,7 +73,7 @@ class Util
                 }
             }
         }
-        return self::formatMinutes($minutes);
+        return self::formatMinutes(intval($minutes));
     }
 
     public static function formatMinutes($minutes){
