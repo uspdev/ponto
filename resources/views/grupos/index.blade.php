@@ -30,10 +30,10 @@
           <td>{{ $grupo->codpes_supervisor }}</td>
           <td>{{ $grupo->codpes_autorizador }}</td>
           <td>{{ $grupo->carga_horaria }}</td>
-          <td align="center">
+          <td class="text-center">
             <a href="/grupos/{{$grupo->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
               @can ('admin')
-              <form method="POST" action="/grupos/{{$grupo->id}}/">
+              <form method="POST" action="/grupos/{{$grupo->id}}/" class="d-inline">
                 @csrf
                 @method('delete')
                 <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esse grupo?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>
