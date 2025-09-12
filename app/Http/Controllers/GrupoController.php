@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GrupoRequest;
 use App\Models\Grupo;
+use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 class GrupoController extends Controller
 {
@@ -47,6 +49,15 @@ class GrupoController extends Controller
         $this->authorize('admin');
 
         $validated = $request->validated();
+
+        // Identifica os chefes, cria os usuários caso não existam, busca o usuário e adiciona permissão hierárquica boss
+        $bosses = [$validated['codpes_supervisor'], $validated['codpes_autorizador']];
+        foreach ($bosses as $boss) {
+            User::findOrCreateFromReplicado($boss);
+            $user = User::where('codpes', $boss)->first();
+            $user->givePermissionTo(Permission::where('guard_name', User::$hierarquiaNs)->where('name', 'boss')->first());
+        }
+
         $grupo = Grupo::create($validated);
         request()->session()->flash('alert-info','Grupo cadastrado com sucesso!');
         return redirect("/grupos");
@@ -89,6 +100,15 @@ class GrupoController extends Controller
     {
         $this->authorize('boss');
         $validated = $request->validated();
+
+        // Identifica os chefes, cria os usuários caso não existam, busca o usuário e adiciona permissão hierárquica boss
+        $bosses = [$validated['codpes_supervisor'], $validated['codpes_autorizador']];
+        foreach ($bosses as $boss) {
+            User::findOrCreateFromReplicado($boss);
+            $user = User::where('codpes', $boss)->first();
+            $user->givePermissionTo(Permission::where('guard_name', User::$hierarquiaNs)->where('name', 'boss')->first());
+        }
+        
         $grupo->update($validated);
         request()->session()->flash('alert-info','Grupo atualizado com sucesso');
         return redirect("/grupos");
