@@ -1,5 +1,5 @@
 @foreach ($registros as $registro)
-  <tr>
+  <tr @if ($registro->status == 'análise') class="table-warning" @endif>
     <td>
       @if($registro->type == 'in')
         <i class="fas fa-sign-in-alt text-success"></i>
