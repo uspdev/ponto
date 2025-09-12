@@ -132,13 +132,47 @@ class PessoaController extends Controller
             ->where("codpes", "=", $pessoa["codpes"])
             ->get();
 
+        // Totalizador
+        $total = Util::computeTotal($computes);
+        $carga_horaria_semanal = (!Grupo::getGroup($pessoa['codpes'])) ? 0 : Grupo::getGroup($pessoa['codpes'])->carga_horaria;
+        $quantidade_dias_uteis = Util::contarDiasUteis(request()->in, request()->out);
+        $carga_horaria_total = $quantidade_dias_uteis * ($carga_horaria_semanal / 5);
+        $total_resgistrado = (!empty($total)) ? $total : '0 horas';
+        
+        // Criar os intervalos
+        $intervalo1 = CarbonInterval::hours(88); # SUBSTITUIR
+        $intervalo2 = CarbonInterval::hours(54)->minutes(40); # SUBSTITUIR
+
+        // Converter para minutos
+        $min1 = $intervalo1->totalMinutes;
+        $min2 = $intervalo2->totalMinutes;
+
+        // Calcular a diferença
+        $diff = $min1 - $min2;
+
+        // Converter em horas e minutos totais
+        $horas = intdiv($diff, 60);
+        $minutos = $diff % 60;
+
+        // Exibir em formato hh:mm
+        $saldo = "$horas horas e $minutos minutos";
+        
+        $totalizador = [
+            'carga_horaria_semanal' => $carga_horaria_semanal, # inteiro (horas)
+            'quantidade_dias_uteis' => $quantidade_dias_uteis, # inteiro (dias)
+            'carga_horaria_total' => $carga_horaria_total, # inteiro (horas)
+            'total_registrado' => $total_resgistrado, # string (hh horas e mm minutos)
+            'saldo' => $saldo, # string (hh horas e mm minutos)
+        ];    
+
         return view("pessoas.show", [
             "pessoa" => $pessoa,
             "emails" => $emails,
             "telefones" => $telefones,
             "registros" => $registros,
             "computes" => $computes,
-            "total" => Util::computeTotal($computes),
+            "total" => $total,
+            'totalizador' => $totalizador,
             "datas" => $datas,
         ]);
     }
