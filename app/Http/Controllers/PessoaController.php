@@ -134,14 +134,22 @@ class PessoaController extends Controller
 
         // Totalizador
         $total = Util::computeTotal($computes);
+        if (empty($total)) {
+            $total_horas = 0;
+            $total_minutos = 0;
+        } else {
+            $arrayTotal = explode(" ", $total);
+            $total_horas = $arrayTotal[0];
+            $total_minutos = $arrayTotal[3];
+        }
         $carga_horaria_semanal = (!Grupo::getGroup($pessoa['codpes'])) ? 0 : Grupo::getGroup($pessoa['codpes'])->carga_horaria;
         $quantidade_dias_uteis = Util::contarDiasUteis(request()->in, request()->out);
         $carga_horaria_total = $quantidade_dias_uteis * ($carga_horaria_semanal / 5);
         $total_resgistrado = (!empty($total)) ? $total : '0 horas';
         
         // Criar os intervalos
-        $intervalo1 = CarbonInterval::hours(88); # SUBSTITUIR
-        $intervalo2 = CarbonInterval::hours(54)->minutes(40); # SUBSTITUIR
+        $intervalo1 = CarbonInterval::hours($carga_horaria_total); 
+        $intervalo2 = CarbonInterval::hours($total_horas)->minutes($total_minutos); 
 
         // Converter para minutos
         $min1 = $intervalo1->totalMinutes;

@@ -59,14 +59,7 @@
         <div class="card">
           <div class="card-body">
 
-            {{-- MELHORAR A VISUALIZAÇÃO DESTE TOTALIZADOR --}}
-            <h5 class="card-title">Totalizador</h5>
-            <strong>Carga horária semanal:</strong> {{ $totalizador['carga_horaria_semanal'] }} horas<br />
-            <strong>Quantidade de dias úteis:</strong> {{ $totalizador['quantidade_dias_uteis'] }} <br />
-            <strong>Carga horária total: </strong>{{ $totalizador['carga_horaria_total'] }} horas<br>
-            <strong>Total registrado: </strong>{{ $totalizador['total_registrado'] }} <br />
-            <strong>Saldo:</strong> <span @if ($total < $totalizador['carga_horaria_total']) class="text-danger" @endif>{{ $totalizador['saldo'] }}</span>
-            <br /><br />
+            @include('pessoas.partials.totalizador')
 
             @can('boss')
             <a class="btn btn-info" href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
@@ -120,7 +113,7 @@
         </div>
 
       </div>
-      <div class="col-lg-7 p-3">
+      <div class="col-lg-3 p-3">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Registros</h5>
