@@ -58,30 +58,8 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Totalizador</h5>
-            
-            @php
-              $carga_horaria_semanal = (!App\Models\Grupo::getGroup($pessoa['codpes'])) ? 0 : App\Models\Grupo::getGroup($pessoa['codpes'])->carga_horaria;
-              $carga_horaria_diaria = $carga_horaria_semanal / 5;
-              $quantidade_dias_uteis = App\Utils\Util::contarDiasUteis(request()->in, request()->out); 
-              $carga_horaria_total = $quantidade_dias_uteis * $carga_horaria_diaria;
-              $arrayTotal = (!empty($total)) ? array_map('trim', explode('e', $total)) : [];
-              $total_horas = (!empty($arrayTotal)) ? trim(substr($arrayTotal[0], 0, 2)) : 0;
-              $total_minutos = (!empty($arrayTotal[1])) ? trim(substr($arrayTotal[1], 0, 2)) : 0;
-              $total_registrado = (!empty($total)) ? $total : '0 horas';
-              $carga_horaria_total_minutos = $carga_horaria_total * 60;
-              $total_registrado_minutos = ($total_horas * 60) + $total_minutos;
-              $saldo_minutos = $total_registrado_minutos - $carga_horaria_total_minutos;
-              $saldo = App\Utils\Util::formatMinutes(abs($saldo_minutos));
-            @endphp  
 
-            <strong>Carga horária semanal:</strong> {{ $carga_horaria_semanal }} horas<br />
-            <strong>Quantidade de dias úteis:</strong> {{ $quantidade_dias_uteis }} <br />
-            <strong>Carga horária total: </strong>{{ $carga_horaria_total }} horas<br>
-            <strong>Total registrado: </strong>{{ $total_registrado }} <br />
-            <strong>Saldo:</strong> <span @if ($total_horas < $carga_horaria_total) style="color: #f00;" @endif>{{ $saldo }}</span>
-
-            <br /><br />
+            @include('pessoas.partials.totalizador')
 
             @can('boss')
             <a class="btn btn-info" href="/folha/{{ $pessoa['codpes'] }}/?in={{ request()->in }}&out={{ request()->out }}">
@@ -135,7 +113,7 @@
         </div>
 
       </div>
-      <div class="col-lg-7 p-3">
+      <div class="col-lg-3 p-3">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Registros</h5>

@@ -106,7 +106,7 @@ class Util
             }
         }
         
-        return [$day,$registros, self::formatMinutes($minutos_do_dia)];
+        return [$day,$registros, self::formatMinutes(intval($minutos_do_dia))];
     }
     
     /**
