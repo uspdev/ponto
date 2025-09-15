@@ -54,6 +54,7 @@ class RegistroController extends Controller
         # verifica se é entrada ou saída
         $registros = Registro::where('created_at', '>=', Carbon::today())
             ->where('codpes',$validated['codpes'])
+            ->where('status', 'válido') # apenas registros validados
             ->orderBy('created_at', 'desc')
             ->get();
 
