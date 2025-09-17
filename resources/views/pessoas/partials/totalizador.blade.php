@@ -15,6 +15,10 @@
                       <td class="text-right">{{ $totalizador['quantidade_dias_uteis'] }}</td>
                     </tr>
                     <tr>
+                      <td>Dias registrados <span class="text-secondary font-italic">(dias)</span></td>
+                      <td class="text-right">{{ $totalizador['quantidade_dias_registrados'] }}</td>
+                    </tr>                    
+                    <tr>
                       <td>Jornada mensal <span class="text-secondary font-italic">(horas)</span></td>
                       <td class="text-right">{{ $totalizador['carga_horaria_total'] }}</td>
                     </tr>
