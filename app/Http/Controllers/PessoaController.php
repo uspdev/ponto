@@ -113,6 +113,8 @@ class PessoaController extends Controller
 
         $computes = Util::compute($pessoa["codpes"], $in, $out);
 
+        $quantidade_dias_registrados = count(array_filter($computes, fn($v) => !empty($v)));
+
         if (count($computes) > 31) {
             $request
                 ->session()
@@ -168,6 +170,7 @@ class PessoaController extends Controller
         $totalizador = [
             'carga_horaria_semanal' => $carga_horaria_semanal, # inteiro (horas)
             'quantidade_dias_uteis' => $quantidade_dias_uteis, # inteiro (dias)
+            'quantidade_dias_registrados' => $quantidade_dias_registrados, # inteiro (dias)
             'carga_horaria_total' => $carga_horaria_total, # inteiro (horas)
             'total_registrado' => $total_resgistrado, # string (hh horas e mm minutos)
             'saldo' => $saldo, # string (hh horas e mm minutos)
