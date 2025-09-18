@@ -35,13 +35,6 @@
                                 <i class="fa fa-user-circle fa-lg text-info ml-1"></i>
                             </a>
                         @endif
-                        @auth
-                            {{-- Se logado mostrar a foto do registro --}}
-                            <a href="#" data-toggle="modal" data-target="#modalFotoRegistro" title="Mostrar foto do registro"
-                                data-whatever="{{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}, '/registros/{{ $registro->id }}/picture'">
-                                <i class="fa fa-camera fa-lg text-info ml-1"></i>
-                            </a>
-                        @endauth
                     </li>
                 @empty
                     <li class="list-group-item">
