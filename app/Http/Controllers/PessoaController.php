@@ -132,6 +132,7 @@ class PessoaController extends Controller
         $registros = Registro::where("created_at", ">=", $in)
             ->where("created_at", "<=", $out)
             ->where("codpes", "=", $pessoa["codpes"])
+            ->orderBy("created_at", "asc")
             ->get();
 
         // Totalizador
@@ -142,7 +143,13 @@ class PessoaController extends Controller
         } else {
             $arrayTotal = explode(" ", $total);
             $total_horas = $arrayTotal[0];
+            if (empty($arrayTotal[3])) {
+                $arrayTotal[2] = 'e';
+                $arrayTotal[3] = '0';
+                $arrayTotal[4] = 'minutos'; 
+            }
             $total_minutos = $arrayTotal[3];
+            // dd($arrayTotal);
         }
         $carga_horaria_semanal = (!Grupo::getGroup($pessoa['codpes'])) ? 0 : Grupo::getGroup($pessoa['codpes'])->carga_horaria;
         $quantidade_dias_uteis = Util::contarDiasUteis(request()->in, request()->out);
@@ -164,9 +171,12 @@ class PessoaController extends Controller
         $horas = intdiv($diff, 60);
         $minutos = $diff % 60;
 
+        $horas = ($horas < 0) ? $horas * -1 : $horas;
+        $minutos = ($minutos < 0) ? $minutos * -1 : $minutos;
+
         // Exibir em formato hh:mm
         $saldo = "$horas horas e $minutos minutos";
-        
+
         $totalizador = [
             'carga_horaria_semanal' => $carga_horaria_semanal, # inteiro (horas)
             'quantidade_dias_uteis' => $quantidade_dias_uteis, # inteiro (dias)
@@ -174,7 +184,7 @@ class PessoaController extends Controller
             'carga_horaria_total' => $carga_horaria_total, # inteiro (horas)
             'total_registrado' => $total_resgistrado, # string (hh horas e mm minutos)
             'saldo' => $saldo, # string (hh horas e mm minutos)
-        ];    
+        ];  
 
         return view("pessoas.show", [
             "pessoa" => $pessoa,

@@ -14,7 +14,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 @php
-                    $registros = $place->registros->where('created_at', '>=', \Carbon\Carbon::today())->whereNull('motivo');
+                    $registros = $place->registros->where('status', 'válido')->where('created_at', '>=', \Carbon\Carbon::today())->sortBy('created_at');
                 @endphp
                 @forelse ($registros as $registro)
                     <li class="list-group-item">
@@ -24,7 +24,7 @@
                             <i class="fas fa-sign-in-alt text-success"></i> {{ $registro->created_at->format('H:i') }} (Entrada)
                             - {{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}
                         @elseif ($registro->type == 'out')
-                            <i class="fas fa-sign-in-alt text-danger"></i> {{ $registro->created_at->format('H:i') }} (Saída)
+                            <i class="fas fa-sign-out-alt text-danger"></i> {{ $registro->created_at->format('H:i') }} (Saída)
                             - {{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}
                         @endif
 
@@ -35,13 +35,6 @@
                                 <i class="fa fa-user-circle fa-lg text-info ml-1"></i>
                             </a>
                         @endif
-                        @auth
-                            {{-- Se logado mostrar a foto do registro --}}
-                            <a href="#" data-toggle="modal" data-target="#modalFotoRegistro" title="Mostrar foto do registro"
-                                data-whatever="{{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}, '/registros/{{ $registro->id }}/picture'">
-                                <i class="fa fa-camera fa-lg text-info ml-1"></i>
-                            </a>
-                        @endauth
                     </li>
                 @empty
                     <li class="list-group-item">
