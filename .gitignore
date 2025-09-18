@@ -14,7 +14,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-public/vendor
+/public/vendor
 
 *~
 *.swp
@@ -23,4 +23,4 @@ public/vendor
 Dockerfile.custom
 php.ini
 
-/.ddev
+!/storage/app/feriados
