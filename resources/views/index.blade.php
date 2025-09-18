@@ -24,7 +24,7 @@
                             <i class="fas fa-sign-in-alt text-success"></i> {{ $registro->created_at->format('H:i') }} (Entrada)
                             - {{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}
                         @elseif ($registro->type == 'out')
-                            <i class="fas fa-sign-in-alt text-danger"></i> {{ $registro->created_at->format('H:i') }} (Saída)
+                            <i class="fas fa-sign-out-alt text-danger"></i> {{ $registro->created_at->format('H:i') }} (Saída)
                             - {{ \Uspdev\Replicado\Pessoa::obterNome($registro->codpes) }}
                         @endif
 
