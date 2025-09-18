@@ -132,6 +132,7 @@ class PessoaController extends Controller
         $registros = Registro::where("created_at", ">=", $in)
             ->where("created_at", "<=", $out)
             ->where("codpes", "=", $pessoa["codpes"])
+            ->orderBy("created_at", "asc")
             ->get();
 
         // Totalizador
