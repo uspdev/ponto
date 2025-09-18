@@ -14,7 +14,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 @php
-                    $registros = $place->registros->where('created_at', '>=', \Carbon\Carbon::today())->whereNull('motivo');
+                    $registros = $place->registros->where('status', 'válido')->where('created_at', '>=', \Carbon\Carbon::today());
                 @endphp
                 @forelse ($registros as $registro)
                     <li class="list-group-item">
