@@ -23,4 +23,4 @@ yarn-error.log
 Dockerfile.custom
 php.ini
 
-!/storage/app/feriados
+
