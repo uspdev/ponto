@@ -14,6 +14,7 @@ class Registro extends Model
 
     public static $motivos = [
         'Esquecimento',
+        'Graduação',
         'Férias',
         'Consulta Médica',
         'Licença Médica',
