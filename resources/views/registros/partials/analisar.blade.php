@@ -1,4 +1,4 @@
-@can('admin')
+@can('boss')
     <br />
     <div class="card">
         <div class="card-header font-weight-bold">
