@@ -28,7 +28,7 @@
                     </tr>  
                     <tr>
                       <td>Saldo</td>
-                      <td class="text-right"><span @if ($total < $totalizador['carga_horaria_total']) class="text-danger">(-) {{ $totalizador['saldo'] }} @else >(+) {{ $totalizador['saldo'] }} @endif</span></td>
+                      <td class="text-right"><span @if ($totalizador['total_horas'] < $totalizador['carga_horaria_total']) class="text-danger">(-) {{ $totalizador['saldo'] }} @else >(+) {{ $totalizador['saldo'] }} @endif</span></td>
                     </tr>                                      
                   </tbody>                    
               </table>

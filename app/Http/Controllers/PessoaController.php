@@ -183,6 +183,7 @@ class PessoaController extends Controller
             'quantidade_dias_registrados' => $quantidade_dias_registrados, # inteiro (dias)
             'carga_horaria_total' => $carga_horaria_total, # inteiro (horas)
             'total_registrado' => $total_resgistrado, # string (hh horas e mm minutos)
+            'total_horas' => $total_horas, # inteiro (horas)
             'saldo' => $saldo, # string (hh horas e mm minutos)
         ];  
 
