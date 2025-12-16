@@ -52,7 +52,9 @@ class RegistroController extends Controller
         $registro->image = $image_name;
 
         # verifica se é entrada ou saída
-        $registros = Registro::where('created_at', '>=', Carbon::today())
+        // $registros = Registro::where('created_at', '>=', Carbon::today())
+        $registros = Registro::where('created_at', '>=', \Carbon\Carbon::today()->startOfDay())
+            ->where('created_at', '<=', \Carbon\Carbon::today()->endOfDay())
             ->where('codpes',$validated['codpes'])
             ->where('status', 'válido') # apenas registros validados
             ->orderBy('created_at', 'desc')
